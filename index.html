@@ -1,0 +1,3046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPC S&C Cup Series — Off-Season Two-a-Days Standings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #090a0d;
+            --surface: #12141a;
+            --surface-hover: #181c25;
+            --card: #151821;
+            --border: #232834;
+            --border-light: #2f3647;
+            --text-main: #f3f4f6;
+            --text-muted: #8e96a8;
+            --gold: #fcc600;
+            --gold-glow: rgba(252, 198, 0, 0.25);
+            --red: #ef4444;
+            --red-glow: rgba(239, 68, 68, 0.2);
+            --green: #10b981;
+            --green-glow: rgba(16, 185, 129, 0.2);
+            --blue: #3b82f6;
+            --cyan: #06b6d4;
+            --purple: #a855f7;
+            --font-display: 'Chakra Petch', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(252, 198, 0, 0.04) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
+        }
+
+        /* Top Header & Broadcast Bar */
+        .header-bar {
+            background: linear-gradient(180deg, #161922 0%, #101218 100%);
+            border-bottom: 2px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .tpc-logo {
+            height: 36px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+        }
+
+        .title-group h1 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .title-group h1 span.cup-badge {
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 2px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--green-glow);
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+            background: var(--surface);
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: var(--surface-hover);
+            border-color: var(--gold);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #fcc600 0%, #e5b200 100%);
+            color: #090a0d;
+            border: none;
+            box-shadow: 0 2px 10px var(--gold-glow);
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #ffd026 0%, #fcc600 100%);
+            color: #000;
+            box-shadow: 0 4px 14px rgba(252, 198, 0, 0.4);
+        }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #fff;
+            border: none;
+        }
+
+                .btn.active {
+            background: var(--gold);
+            color: #090a0d;
+            border-color: var(--gold);
+        }
+
+        /* Dropdown Navigation Menus */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 6px);
+            background: #141722;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
+            min-width: 230px;
+            z-index: 150;
+            overflow: hidden;
+            animation: dropdownFadeIn 0.15s ease;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        @keyframes dropdownFadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            color: #d1d5db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            text-decoration: none;
+            user-select: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(252, 198, 0, 0.12);
+            color: var(--gold);
+        }
+
+        .dropdown-item-desc {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 1px;
+            font-weight: 400;
+        }
+
+        /* Rolling TV Broadcast Banner */
+        .tv-broadcast-bar {
+            background: linear-gradient(90deg, #1e1302 0%, #151821 35%, #151821 65%, #1e1302 100%);
+            border-bottom: 2px solid var(--gold);
+            padding: 10px 24px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideDown 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tv-broadcast-bar.active {
+            display: flex;
+        }
+
+        .tv-progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tv-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+            transition: width 0.1s linear;
+        }
+
+        .tv-slide-title {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tv-slide-badge {
+            background: rgba(252, 198, 0, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: var(--font-mono);
+        }
+
+        .tv-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tv-ctrl-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-light);
+            color: var(--text-main);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+        }
+
+        .tv-ctrl-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* Sub-Bar / Rules & Filters */
+        .info-strip {
+            background: #0d0f14;
+            border-bottom: 1px solid var(--border);
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .rule-summary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 12px;
+            flex-wrap: wrap;
+        }
+
+        .rule-pill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #d1d5db;
+            font-family: var(--font-mono);
+            font-size: 11px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .filter-btn:hover {
+            color: #fff;
+            border-color: var(--border-light);
+        }
+
+        .filter-btn.active {
+            background: var(--gold);
+            color: #090a0d;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .week-selector-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-right: 12px;
+            padding-right: 12px;
+            border-right: 1px solid var(--border);
+        }
+
+        .week-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .week-btn:hover {
+            color: #fff;
+            border-color: var(--border-light);
+        }
+
+        .week-btn.active {
+            background: var(--cyan);
+            color: #090a0d;
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Main Container */
+                .main-container {
+            flex: 1;
+            padding: 24px 24px 105px 24px;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Docked Bottom Series Bar */
+        .bottom-series-bar {
+            position: fixed;
+            bottom: 33px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(20, 24, 33, 0.95) 0%, rgba(12, 14, 20, 0.98) 100%);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-light);
+            padding: 7px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 89;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .series-nav-label {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1.2px;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Top 3 Leaders / Podium Strip */
+        .podium-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .podium-card {
+            background: linear-gradient(135deg, var(--card) 0%, var(--surface) 100%);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .podium-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+        }
+
+        .podium-card.p1 {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(252, 198, 0, 0.08) 0%, var(--surface) 100%);
+            box-shadow: 0 4px 20px rgba(252, 198, 0, 0.12);
+        }
+
+        .podium-card.p1::before {
+            content: "LEADER";
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-family: var(--font-display);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--gold);
+            background: rgba(252, 198, 0, 0.15);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .podium-rank {
+            font-family: var(--font-display);
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--text-muted);
+            line-height: 1;
+            width: 48px;
+        }
+
+        .podium-card.p1 .podium-rank {
+            color: var(--gold);
+            text-shadow: 0 0 14px var(--gold-glow);
+        }
+
+        .podium-info {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        .podium-name {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .car-badge-large {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            color: #090a0d;
+            background: #fff;
+            padding: 2px 9px;
+            border-radius: 4px;
+            letter-spacing: -0.5px;
+            min-width: 38px;
+            text-align: center;
+        }
+
+        .podium-card.p1 .car-badge-large {
+            background: var(--gold);
+        }
+
+        .podium-stats {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: flex;
+            gap: 12px;
+            font-family: var(--font-mono);
+        }
+
+        .podium-score {
+            text-align: right;
+        }
+
+        .podium-score-val {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .podium-score-max {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* NASCAR Timing & Scoring Board */
+        .board-container {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .board-header {
+            display: grid;
+            grid-template-columns: 60px 68px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
+            padding: 14px 22px;
+            background: #101217;
+            border-bottom: 2px solid var(--border);
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            align-items: center;
+        }
+
+        .board-row {
+            display: grid;
+            grid-template-columns: 60px 68px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
+            padding: 15px 22px;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
+            transition: background 0.15s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .board-row:hover {
+            background: var(--surface-hover);
+        }
+
+        .board-row.p1 {
+            background: linear-gradient(90deg, rgba(252, 198, 0, 0.08) 0%, transparent 60%);
+            border-left: 3px solid var(--gold);
+        }
+
+        .board-row.podium {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
+        }
+
+        .board-row.below-cutline {
+            opacity: 0.88;
+        }
+
+        .board-row.expanded {
+            background: #171a23;
+            border-bottom: none;
+        }
+
+        .cell-pos {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .board-row.p1 .cell-pos {
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .car-badge {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            color: #090a0d;
+            background: #e5e7eb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            text-align: center;
+            min-width: 40px;
+            letter-spacing: -0.5px;
+        }
+
+        .board-row.p1 .car-badge {
+            background: var(--gold);
+        }
+
+        .cell-driver {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .driver-name {
+            font-family: var(--font-display);
+            font-size: 19px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .driver-series {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 3px;
+        }
+
+        .series-tag {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 7px;
+            border-radius: 3px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+        }
+
+        .cell-score {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+            text-align: right;
+        }
+
+        .score-val {
+            color: var(--gold);
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .score-max {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .score-slash {
+            color: var(--border-light);
+            margin: 0 2px;
+        }
+
+        .cell-gap {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .gap-leader {
+            color: var(--gold);
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .gap-behind {
+            color: #e5e7eb;
+        }
+
+        .gap-danger {
+            color: var(--red);
+        }
+
+        .cell-att, .cell-comp {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: right;
+            color: #d1d5db;
+        }
+
+        .progress-subtext {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .cell-trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            justify-content: flex-end;
+        }
+
+        .session-pip {
+            width: 12px;
+            height: 22px;
+            border-radius: 3px;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+
+        .session-pip:hover {
+            transform: scale(1.2);
+        }
+
+        .session-pip.full {
+            background: var(--green);
+            box-shadow: 0 0 6px var(--green-glow);
+        }
+
+        .session-pip.partial {
+            background: var(--gold);
+            box-shadow: 0 0 6px var(--gold-glow);
+        }
+
+        .session-pip.missed {
+            background: var(--red);
+            box-shadow: 0 0 6px var(--red-glow);
+        }
+
+        .cell-action {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-details {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-details:hover, .board-row.expanded .btn-details {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+        }
+
+        /* Inline Collapsible Details Drawer */
+        .details-drawer {
+            display: none;
+            background: #0f1118;
+            border-bottom: 2px solid var(--border);
+            padding: 14px 20px 18px 20px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .details-drawer.open {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .drawer-title {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .drawer-sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .drawer-session-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 11px;
+        }
+
+        .drawer-session-title {
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .drawer-session-meta {
+            color: var(--text-muted);
+            font-size: 10px;
+            font-family: var(--font-mono);
+        }
+
+        .drawer-note {
+            background: rgba(252, 198, 0, 0.06);
+            border-left: 3px solid var(--gold);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        /* Cut Line Divider */
+        .cutline-divider {
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.08) 50%, rgba(239, 68, 68, 0.25) 100%);
+            border-top: 2px dashed var(--red);
+            border-bottom: 2px dashed var(--red);
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: var(--red);
+            text-transform: uppercase;
+        }
+
+        .cutline-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cutline-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cutline-pill {
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-family: var(--font-mono);
+        }
+
+        .cutline-pill.qualified {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .cutline-pill.below {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--red);
+            color: var(--red);
+        }
+
+        /* Cut line progress bar inside rows */
+        .cutline-progress-wrap {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .cutline-progress-bar {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .cutline-progress-bar.qualified {
+            background: var(--green);
+        }
+
+        /* Driver Mobile Snapshot View */
+        .mobile-view-container {
+            display: none;
+            max-width: 440px;
+            margin: 20px auto;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .mobile-view-container.active {
+            display: block;
+        }
+
+        .mobile-header {
+            background: linear-gradient(180deg, #181b24 0%, #101218 100%);
+            border-bottom: 2px solid var(--gold);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mobile-driver-hero {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            background: radial-gradient(circle at 50% 0%, rgba(252, 198, 0, 0.08) 0%, transparent 70%);
+        }
+
+        .mobile-car-large {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            background: var(--gold);
+            color: #000;
+            padding: 4px 16px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .mobile-driver-name {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .mobile-standing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-family: var(--font-mono);
+            color: #d1d5db;
+            margin-top: 8px;
+        }
+
+        .mobile-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 16px 20px;
+        }
+
+        .mobile-kpi-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .mobile-kpi-title {
+            font-family: var(--font-display);
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .mobile-kpi-val {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 2px;
+        }
+
+        .mobile-sessions-container {
+            padding: 0 20px 20px 20px;
+        }
+
+        .mobile-session-row {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mobile-session-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .mobile-session-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .mobile-session-sub {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .mobile-session-tag {
+            font-size: 10px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .mobile-session-tag.full {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+
+        .mobile-session-tag.partial {
+            background: rgba(252, 198, 0, 0.15);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .mobile-session-tag.missed {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
+            border: 1px solid var(--red);
+        }
+
+        /* Footer Ticker */
+        .live-ticker-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0c0e14;
+            border-top: 1px solid var(--border);
+            padding: 8px 24px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 90;
+        }
+
+        .ticker-content strong {
+            color: var(--gold);
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--card);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            max-width: 640px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8);
+            animation: modalPop 0.2s ease-out;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            background: #101218;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0 4px;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Utility classes */
+        .col-right { text-align: right; }
+        .hide-form .col-trend { display: none !important; }
+
+        /* Athlete PIN & Coach Mode Styles */
+        .pin-gate-card {
+            background: linear-gradient(180deg, #151821 0%, #101218 100%);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 420px;
+            margin: 30px auto;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+        .pin-input-field {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            letter-spacing: 6px;
+            text-align: center;
+            background: #090a0d;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            color: var(--gold);
+            padding: 10px 14px;
+            width: 160px;
+            margin: 12px 0;
+            outline: none;
+        }
+        .pin-input-field:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+        .badge-coach-active {
+            background: rgba(252, 198, 0, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .badge-athlete-active {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--green);
+            color: var(--green);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Slide Export Modal Styles */
+        .export-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .export-tile {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .export-tile:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            background: var(--surface-hover);
+        }
+        .export-tile-title {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .export-tile-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Teamworks Blast Modal Styles */
+        .blast-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-top: 12px;
+        }
+        .blast-table th, .blast-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+        }
+        .blast-table th {
+            color: var(--text-muted);
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-size: 10px;
+        }
+        .blast-textarea {
+            width: 100%;
+            height: 110px;
+            background: #090a0d;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            color: #f3f4f6;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <!-- Top Broadcast Header -->
+    <header class="header-bar">
+        <div class="brand-container">
+            <img class="tpc-logo" src="data:image/png;base64,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" alt="Toyota Performance Center">
+            <div class="title-group">
+                <h1>Cup Series <span class="cup-badge">Standings</span></h1>
+                <div class="subtitle">
+                    <span class="status-dot"></span>
+                    <span>Off-Season Two-a-Days</span>
+                    <span>•</span>
+                    <span id="sessionIndicator">Week 1 • Session 6 of 10</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-controls">
+            <button class="btn btn-gold" id="tvModeBtn" onclick="toggleTvMode()">
+                📺 Rolling TV Screen
+            </button>
+
+            <!-- Views Dropdown -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" onclick="toggleDropdown('viewsDropdown', event)">
+                    👁️ Views ▾
+                </button>
+                <div class="dropdown-menu" id="viewsDropdown">
+                    <div class="dropdown-item" onclick="toggleMobileView(); closeAllDropdowns();">
+                        <span style="font-size: 14px;">📱</span>
+                        <div>
+                            <div>Driver Mobile Card</div>
+                            <div class="dropdown-item-desc">Snapshot & individual logging view</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-item" id="toggleFormColBtn" onclick="toggleFormColumn(); closeAllDropdowns();">
+                        <span style="font-size: 14px;">📋</span>
+                        <div>
+                            <div>Workout Form Cards</div>
+                            <div class="dropdown-item-desc">Toggle sets/reps completeness column</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-item" onclick="toggleAllDetails(); closeAllDropdowns();">
+                        <span style="font-size: 14px;">↕️</span>
+                        <div>
+                            <div>Expand / Collapse Rows</div>
+                            <div class="dropdown-item-desc">Toggle all driver breakdown tables</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export & Share Dropdown -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" onclick="toggleDropdown('shareDropdown', event)">
+                    📤 Export & Share ▾
+                </button>
+                <div class="dropdown-menu" id="shareDropdown">
+                    <div class="dropdown-item" onclick="openExportModal(); closeAllDropdowns();">
+                        <span style="font-size: 14px;">📸</span>
+                        <div>
+                            <div>Export TV Slides (PNG)</div>
+                            <div class="dropdown-item-desc">Single slide or batch of all 5 series</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-item" onclick="openTeamworksModal(); closeAllDropdowns();">
+                        <span style="font-size: 14px;">💬</span>
+                        <div>
+                            <div>Teamworks Broadcast</div>
+                            <div class="dropdown-item-desc">Formatted recap text for Hub feed</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-item" onclick="openPinModal(); closeAllDropdowns();">
+                        <span style="font-size: 14px;">🔑</span>
+                        <div>
+                            <div>Athlete Magic Links / PIN</div>
+                            <div class="dropdown-item-desc">Private links & authentication</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="openRulesModal()">
+                ℹ️ Rules (295 pt)
+            </button>
+        </div>
+    </header>
+
+    <!-- Rolling TV Screen Banner (when active) -->
+    <div class="tv-broadcast-bar" id="tvBroadcastBar">
+        <div class="tv-slide-title">
+            <span style="color: #fff;">LIVE GYM BROADCAST:</span>
+            <span id="tvSlideTitleText">ALL SERIES (OVERALL FIELD)</span>
+            <span class="tv-slide-badge" id="tvSlideBadge">SLIDE 1/5</span>
+        </div>
+        <div class="tv-controls">
+            <button class="tv-ctrl-btn" onclick="prevTvSlide()">◀ Prev</button>
+            <button class="tv-ctrl-btn" id="tvPlayPauseBtn" onclick="toggleTvPlayback()">⏸ Pause</button>
+            <button class="tv-ctrl-btn" onclick="nextTvSlide()">Next ▶</button>
+            <button class="tv-ctrl-btn" onclick="exportCurrentSlidePng()">📸 PNG Slide</button>
+            <button class="tv-ctrl-btn" onclick="toggleTvFullscreen()">⛶ Fullscreen</button>
+            <button class="tv-ctrl-btn" style="color: var(--red);" onclick="exitTvMode()">✕ Exit TV</button>
+        </div>
+        <div class="tv-progress-track">
+            <div class="tv-progress-fill" id="tvProgressFill"></div>
+        </div>
+    </div>
+
+    <!-- Sub-Bar / Rules & Filters -->
+    <div class="info-strip">
+        <div class="rule-summary">
+            <span><strong>Scoring:</strong></span>
+            <span class="rule-pill">S&C Workouts (162 pts)</span>
+            <span>+</span>
+            <span class="rule-pill">Yoga & Recov (13 pts)</span>
+            <span>+</span>
+            <span class="rule-pill">Friday Comp (20 pts)</span>
+            <span>+</span>
+            <span class="rule-pill">USG Hydration (100 pts)</span>
+            <span>=</span>
+            <span class="rule-pill"><strong>295 pts / wk</strong></span>
+            <span class="rule-pill" id="cutlineRulePill" style="border-color: var(--gold); color: var(--gold);">⚡ 80% Cut Line = 236.0 pts</span>
+        </div>
+
+        <div class="filter-group">
+            <div class="week-selector-group">
+                <button class="week-btn active" id="weekBtn1" onclick="selectWeek(1)">Week 1 (295)</button>
+                <button class="week-btn" id="weekBtn2" onclick="selectWeek(2)">Week 2 (590)</button>
+                <button class="week-btn" id="weekBtn3" onclick="selectWeek(3)">Week 3 (885)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Driver Mobile Snapshot View Container -->
+    <div class="mobile-view-container" id="mobileViewContainer">
+        <div class="mobile-header">
+            <div style="font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--gold); text-transform: uppercase;">
+                Driver Performance Snapshot
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <select id="mobileDriverSelect" onchange="selectMobileDriver(this.value)" style="background: var(--surface); color: #fff; border: 1px solid var(--border); font-size: 11px; padding: 4px 8px; border-radius: 4px; font-family: var(--font-body);">
+                    <!-- Populated dynamically -->
+                </select>
+                <button class="btn" style="padding: 3px 8px; font-size: 10px;" onclick="toggleMobileView()">✕ Close</button>
+            </div>
+        </div>
+
+        <div class="mobile-driver-hero" id="mobileHeroContent">
+            <!-- Dynamically populated -->
+        </div>
+
+        <div class="mobile-kpi-grid" id="mobileKpiContent">
+            <!-- Dynamically populated -->
+        </div>
+
+        <div style="padding: 0 20px 12px 20px;">
+            <div style="font-family: var(--font-display); font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;">
+                7-Day Workout & Logging Breakdown (Sunday–Saturday)
+            </div>
+            <div id="mobileSessionsList">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <div style="padding: 0 20px 20px 20px;">
+            <div id="mobileCoachNoteBox" style="background: rgba(252, 198, 0, 0.08); border-left: 3px solid var(--gold); border-radius: 4px; padding: 12px; font-size: 12px; color: #e5e7eb;">
+                <!-- Populated dynamically -->
+            </div>
+            <button class="btn btn-gold" style="width: 100%; justify-content: center; margin-top: 14px;" onclick="copyDriverLink()">
+                🔗 Copy My Snapshot Link
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Desktop / Gym Display Content -->
+    <main class="main-container" id="mainDashboardView">
+
+        <!-- Top 3 Leaders / Podium Strip -->
+        <section class="podium-grid" id="podiumStrip">
+            <!-- Dynamically populated -->
+        </section>
+
+        <!-- NASCAR Timing & Scoring Board -->
+        <section class="board-container">
+            <div class="board-header">
+                <div>Pos</div>
+                <div>Car</div>
+                <div>Driver</div>
+                <div class="col-right">Score</div>
+                <div class="col-right">Interval</div>
+                <div class="col-right col-att">Attendance</div>
+                <div class="col-right col-comp">Completeness</div>
+                <div class="col-right col-trend">Form Cards</div>
+                <div class="col-right">Details</div>
+            </div>
+
+            <div id="standingsRows">
+                <!-- Dynamically populated with Cut Line -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Docked Bottom Series Bar -->
+    <nav class="bottom-series-bar" id="bottomSeriesBar">
+        <span class="series-nav-label">🏆 SERIES:</span>
+        <button class="filter-btn active" onclick="filterSeries('ALL', this)">All Series</button>
+        <button class="filter-btn" onclick="filterSeries('NASCAR', this)">NASCAR Cup & Xfinity</button>
+        <button class="filter-btn" onclick="filterSeries('ARCA', this)">ARCA Menards</button>
+        <button class="filter-btn" onclick="filterSeries('GT4', this)">Craftsman Truck / GT4</button>
+        <button class="filter-btn" onclick="filterSeries('LATE_MODEL', this)">Late Model Development</button>
+    </nav>
+
+    <!-- Bottom Ticker -->
+    <div class="live-ticker-bar">
+        <div class="ticker-content" id="tickerText">
+            <strong>OFF-SEASON S&C:</strong> Current Cohort: 19 Drivers • Cut Line Threshold: 80% (236.0 pts) • Weekly Max: 295.0 pts (195 S&C + 100 Nutrition) • Leader: Westin Workman (-0.0)
+        </div>
+        <div id="clockDisplay" style="color: var(--text-muted); font-size: 10px;">
+            LOCAL: --:--:-- EST
+        </div>
+    </div>
+
+    <!-- Driver Detail Modal (Fallback / Deep Dive) -->
+    <div class="modal-overlay" id="driverModal" onclick="closeDriverModal(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="car-badge-large" id="modalCarBadge">--</span>
+                    <div>
+                        <h2 id="modalDriverName" style="font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #fff;">Driver Name</h2>
+                        <div id="modalDriverMeta" style="font-size: 12px; color: var(--text-muted); font-family: var(--font-mono);">Series • Rank</div>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModalDirect()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; text-align: center;">
+                    <div style="background: var(--surface); padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+                        <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-display);">TOTAL SCORE</div>
+                        <div id="modalScore" style="font-size: 20px; font-weight: 700; color: var(--gold); font-family: var(--font-mono); margin-top: 2px;">--</div>
+                    </div>
+                    <div style="background: var(--surface); padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+                        <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-display);">DEFICIT TO P1</div>
+                        <div id="modalGap" style="font-size: 20px; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 2px;">--</div>
+                    </div>
+                    <div style="background: var(--surface); padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+                        <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-display);">COMPLETENESS %</div>
+                        <div id="modalCompPct" style="font-size: 20px; font-weight: 700; color: var(--green); font-family: var(--font-mono); margin-top: 2px;">--</div>
+                    </div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 14px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 8px;">
+                    Session-by-Session Breakdown (Week 1)
+                </h3>
+                <div class="session-grid-detail" id="modalSessionsList">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <div id="modalCoachNotes" style="margin-top: 18px; padding: 12px; background: rgba(252, 198, 0, 0.08); border-left: 3px solid var(--gold); border-radius: 4px; font-size: 12px; color: #e5e7eb;">
+                    <!-- Wayne's coaching observation -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rules Modal -->
+    <div class="modal-overlay" id="rulesModal" onclick="closeRulesModal(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 style="font-family: var(--font-display); font-size: 18px; text-transform: uppercase; color: var(--gold);">
+                    🏁 TPC Compliance, Scoring & Cut Line Rules
+                </h2>
+                <button class="modal-close" onclick="closeRulesDirect()">&times;</button>
+            </div>
+            <div class="modal-body" style="font-size: 13px; line-height: 1.7; color: #d1d5db;">
+                <p style="margin-bottom: 12px;">
+                    The <strong>S&C Cup Series</strong> measures athlete intentionality, physical accountability, and daily nutritional discipline during off-season two-a-days.
+                </p>
+                <div style="background: var(--surface); padding: 14px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 14px;">
+                    <div style="color: #fff; font-weight: 700; margin-bottom: 6px;">Weekly Points Architecture (Max 295.0 pts/week):</div>
+                    <ul style="padding-left: 20px; margin: 0;">
+                        <li><strong>🏋️ S&C In-Gym Workouts (Max 162.0 pts):</strong> 6 sessions/week (Mon/Tue/Thu AM & PM). 10.0 pts attendance + up to 17.0 pts workout card fidelity (27.0 pts max per session).</li>
+                        <li><strong>🧘 Wednesday Yoga & Recovery (Max 13.0 pts):</strong> 10.0 pts Yoga attendance + 3.0 pts Active Recovery (≥ 20 min logged in AMS Recovery Tracker).</li>
+                        <li><strong>🏁 Friday Competition (Max 20.0 pts):</strong> 20.0 pts Event attendance via Teamworks Hub Event Check-In.</li>
+                        <li><strong>💧 Stephanie's USG Hydration (Max 100.0 pts):</strong> Monday & Thursday testing. 25.0 pts sample submission + up to 25.0 pts hydration tier score (Tier 1: 25 pts, Tier 2: 15 pts, Tier 3: 10 pts, Tier 4: 5 pts). Max 50.0 pts/test day.</li>
+                    </ul>
+                </div>
+                <div style="background: var(--surface); padding: 14px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 14px;">
+                    <div style="color: var(--gold); font-weight: 700; margin-bottom: 6px;">⚡ Multi-Week 80% T-Shirt Cut Line Milestones:</div>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 6px;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border); color: var(--text-muted); text-align: left;">
+                                <th style="padding: 4px 8px;">Period</th>
+                                <th style="padding: 4px 8px;">Max Possible</th>
+                                <th style="padding: 4px 8px;">80% Cut Line</th>
+                                <th style="padding: 4px 8px;">Requirement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 6px 8px; color: #fff;"><strong>Week 1</strong></td>
+                                <td style="padding: 6px 8px; font-family: var(--font-mono);">295.0 pts</td>
+                                <td style="padding: 6px 8px; font-family: var(--font-mono); color: var(--gold);"><strong>236.0 pts</strong></td>
+                                <td style="padding: 6px 8px; color: var(--text-muted);">Baseline week qualification</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 6px 8px; color: #fff;"><strong>Week 2</strong></td>
+                                <td style="padding: 6px 8px; font-family: var(--font-mono);">590.0 pts</td>
+                                <td style="padding: 6px 8px; font-family: var(--font-mono); color: var(--gold);"><strong>472.0 pts</strong></td>
+                                <td style="padding: 6px 8px; color: var(--text-muted);">Cumulative mid-block check</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px 8px; color: #fff;"><strong>Week 3</strong></td>
+                                <td style="padding: 6px 8px; font-family: var(--font-mono);">885.0 pts</td>
+                                <td style="padding: 6px 8px; font-family: var(--font-mono); color: var(--gold);"><strong>708.0 pts</strong></td>
+                                <td style="padding: 6px 8px; color: var(--green);"><strong>Final T-Shirt Qualification</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background: var(--surface); padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+                    <div style="color: var(--cyan); font-weight: 700; margin-bottom: 6px;">📡 Remote / Traveling Workout & Polar Policy:</div>
+                    <p style="margin: 0;">
+                        Off-site/remote athletes use Wayne's secondary asynchronous calendar track (<strong>"Two-a-Days Remote"</strong>). Remote attendance is split: <strong>5.0 pts</strong> for logging the workout card + <strong>5.0 pts</strong> for verified Polar Heart Rate tracking (Wayne verifies in AMS <em>"S&C - Polar Heart Rate Verification"</em>) + up to 17.0 pts card fidelity. Unverified Polar HR tracking results in a 5.0 pt deduction.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Athlete PIN & Coach Auth Modal -->
+    <div class="modal-overlay" id="pinModal" onclick="closePinModal(event)">
+        <div class="modal-card" style="max-width: 440px;" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 style="font-family: var(--font-display); font-size: 16px; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 8px;">
+                    🔑 Athlete Card & Coach Access
+                </h2>
+                <button class="modal-close" onclick="closePinModalDirect()">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
+                    The timing & scoring board is public to drivers and gym screens, but individual workout card fidelity and Wayne's coaching notes are strictly private.
+                </p>
+
+                <div id="authStatusBanner" style="margin-bottom: 14px;"></div>
+
+                <div style="background: var(--surface); padding: 16px; border-radius: 6px; border: 1px solid var(--border); text-align: left;">
+                    <label style="font-size: 11px; font-family: var(--font-display); color: var(--text-muted); text-transform: uppercase;">Select Athlete</label>
+                    <select id="pinAthleteSelect" style="width: 100%; background: #090a0d; color: #fff; border: 1px solid var(--border-light); font-size: 12px; padding: 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 12px; font-family: var(--font-body);">
+                    </select>
+
+                    <label style="font-size: 11px; font-family: var(--font-display); color: var(--text-muted); text-transform: uppercase;">Driver Magic Token (or Staff Key)</label>
+                    <div style="display: flex; gap: 8px; align-items: center; margin-top: 4px;">
+                        <input type="password" id="pinInputBox" maxlength="24" placeholder="e.g. ir_7x81" style="flex: 1; background: #090a0d; color: var(--gold); border: 1px solid var(--border-light); font-size: 18px; font-family: var(--font-mono); letter-spacing: 2px; padding: 8px; border-radius: 4px; text-align: center;">
+                        <button class="btn btn-gold" style="padding: 10px 16px;" onclick="submitPinUnlock()">Unlock</button>
+                    </div>
+                    <div id="pinErrorMsg" style="font-size: 11px; color: var(--red); margin-top: 6px; display: none;">
+                        ⚠ Invalid token or staff key. Check your direct Teamworks link.
+                    </div>
+                </div>
+
+                <div style="margin-top: 14px; font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;">
+                    <span>Staff: Use <code>?staff=tpc_coach_admin_2026</code></span>
+                    <button class="btn" style="padding: 3px 8px; font-size: 10px;" onclick="lockDriverSession()">Lock Session</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export TV Slides (PNG) Modal -->
+    <div class="modal-overlay" id="exportModal" onclick="closeExportModal(event)">
+        <div class="modal-card" style="max-width: 580px;" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 style="font-family: var(--font-display); font-size: 16px; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 8px;">
+                    📸 Export Broadcast TV Slides (PNG)
+                </h2>
+                <button class="modal-close" onclick="closeExportModalDirect()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
+                    Generate crisp 1080p PNG images of the S&C Cup Series leaderboards. Perfect for dropping into weight room Canva loops, digital signage displays, or team slide decks.
+                </p>
+
+                <div class="export-grid">
+                    <div class="export-tile" onclick="exportCurrentSlidePng()">
+                        <div style="font-size: 24px; margin-bottom: 6px;">🖼️</div>
+                        <div class="export-tile-title">Capture Current View</div>
+                        <div class="export-tile-desc">Exports whatever series is currently active on screen as high-res PNG.</div>
+                    </div>
+                    <div class="export-tile" onclick="batchExportAllSlidesPng()">
+                        <div style="font-size: 24px; margin-bottom: 6px;">⚡</div>
+                        <div class="export-tile-title">Batch Export All 5 Slides</div>
+                        <div class="export-tile-desc">Cycles through All Series, NASCAR, ARCA, GT4, Late Model and downloads all 5 PNGs.</div>
+                    </div>
+                </div>
+
+                <div id="exportStatusBox" style="font-size: 11px; font-family: var(--font-mono); color: var(--green); margin-top: 10px; display: none;">
+                    ⏳ Rendering slides... Please wait.
+                </div>
+
+                <div style="background: var(--surface); padding: 12px; border-radius: 6px; border: 1px solid var(--border); margin-top: 14px; font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+                    <strong style="color: #fff;">💡 Offline / Hardware Fallback:</strong> If operating on an offline PC without network libraries, press <code style="color: var(--gold);">Win + Shift + S</code> or <code style="color: var(--gold);">Ctrl + P</code> in Chrome/Edge to capture the fullscreen TV layout at native display resolution.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teamworks AMS Blast Generator Modal -->
+    <div class="modal-overlay" id="teamworksModal" onclick="closeTeamworksModal(event)">
+        <div class="modal-card" style="max-width: 680px;" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 style="font-family: var(--font-display); font-size: 16px; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 8px;">
+                    📋 Teamworks AMS Broadcast & Driver Links
+                </h2>
+                <button class="modal-close" onclick="closeTeamworksModalDirect()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
+                    Copy ready-to-blast announcements and direct personalized driver magic links for Teamworks AMS messaging (zero spam blocking, official Toyota channel).
+                </p>
+
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <span style="font-size: 11px; font-family: var(--font-display); font-weight: 700; color: #fff; text-transform: uppercase;">
+                            📢 Team Broadcast Message (Copy & Blast to All Drivers)
+                        </span>
+                        <button class="btn btn-gold" style="padding: 2px 8px; font-size: 10px;" onclick="copyBroadcastText()">📋 Copy Announcement</button>
+                    </div>
+                    <textarea class="blast-textarea" id="broadcastTextArea" readonly></textarea>
+                </div>
+
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 11px; font-family: var(--font-display); font-weight: 700; color: #fff; text-transform: uppercase;">
+                            ⚡ Individual Athlete Direct Magic Links (Zero-Friction)
+                        </span>
+                        <button class="btn" style="padding: 2px 8px; font-size: 10px;" onclick="copyAllAthleteLinksCsv()">📋 Copy All Links (CSV)</button>
+                    </div>
+                    <div style="max-height: 240px; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 6px;">
+                        <table class="blast-table">
+                            <thead>
+                                <tr>
+                                    <th>Driver</th>
+                                    <th>Car</th>
+                                    <th>Series</th>
+                                    <th>Driver Token</th>
+                                    <th>Direct Link</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blastTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+                const DRIVERS_DATA = [
+            {
+                pos: 1, car: "55", name: "Westin Workman", series: "NASCAR",
+                token: "ww_9b42",
+                score: 293.5, maxScore: 295.0, gap: 0.0,
+                scPts: 160.5, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 98.5, completenessPts: 100.5,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Flawless consistency across all 6 lift & conditioning blocks. Tier 1 USG hydration both days."
+            },
+            {
+                pos: 2, car: "55", name: "Isabella Robusto", series: "ARCA",
+                token: "ir_7x81",
+                score: 291.4, maxScore: 295.0, gap: -2.1,
+                scPts: 158.4, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 96.5, completenessPts: 98.4,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Excellent intentionality on accessory loads. Hydration discipline pristine."
+            },
+            {
+                pos: 3, car: "20", name: "Gio Ruggiero", series: "ARCA",
+                token: "gr_3e59",
+                score: 290.0, maxScore: 295.0, gap: -3.5,
+                scPts: 157.0, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 95.1, completenessPts: 97.0,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "High energy in conditioning blocks. All weights logged within 10 min of session finish."
+            },
+            {
+                pos: 4, car: "70", name: "Brent Crews", series: "ARCA",
+                token: "bc_6d14",
+                score: 288.5, maxScore: 295.0, gap: -5.0,
+                scPts: 155.5, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 93.6, completenessPts: 95.5,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Rock solid attendance. Power metrics on Tuesday AM jump squats were top of cohort."
+            },
+            {
+                pos: 5, car: "51", name: "Kaden Honeycutt", series: "NASCAR",
+                token: "kh_2a78",
+                score: 287.2, maxScore: 295.0, gap: -6.3,
+                scPts: 154.2, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 92.4, completenessPts: 94.2,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Very consistent effort. Logged RPE on all primary barbell lifts."
+            },
+            {
+                pos: 6, car: "17", name: "Taylor Gray", series: "NASCAR",
+                token: "tg_5m93",
+                score: 286.0, maxScore: 295.0, gap: -7.5,
+                scPts: 153.0, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 91.2, completenessPts: 93.0,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Pushed through Thursday armor session with high intensity. Strong hydration baseline."
+            },
+            {
+                pos: 7, car: "25", name: "Toni Breidinger", series: "ARCA",
+                token: "tn_1k47",
+                score: 284.8, maxScore: 295.0, gap: -8.7,
+                scPts: 151.8, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 90.0, completenessPts: 91.8,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Great dedication to mobility and recovery tracker logs. All card items accounted for."
+            },
+            {
+                pos: 8, car: "18", name: "Tyler Ankrum", series: "NASCAR",
+                token: "ta_8c26",
+                score: 283.5, maxScore: 295.0, gap: -10.0,
+                scPts: 150.5, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 88.7, completenessPts: 90.5,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Completed all volume. Small gaps on accessory drop-set loads, easily rectifiable."
+            },
+            {
+                pos: 9, car: "9", name: "Kaylee Bryson", series: "ARCA",
+                token: "kp_4f90",
+                score: 281.0, maxScore: 295.0, gap: -12.5,
+                scPts: 148.0, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 86.3, completenessPts: 88.0,
+                pips: ["full", "full", "full", "full", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "On track across all 6 sessions. Solid core endurance marks."
+            },
+            {
+                pos: 10, car: "71", name: "Jade Avedisian", series: "GT4",
+                token: "ja_6y15",
+                score: 279.5, maxScore: 295.0, gap: -14.0,
+                scPts: 146.5, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 100.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 84.8, completenessPts: 86.5,
+                pips: ["full", "full", "full", "full", "partial", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Minor missing accessory reps on Wednesday PM conditioning, but strong overall focus."
+            },
+            {
+                pos: 11, car: "5", name: "Dean Thompson", series: "NASCAR",
+                token: "dt_9h32",
+                score: 267.2, maxScore: 295.0, gap: -26.3,
+                scPts: 144.2, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 90.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 82.5, completenessPts: 84.2,
+                pips: ["full", "full", "partial", "full", "partial", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Hydration dropped slightly Thursday (Tier 2). Reminded on electrolyte timing."
+            },
+            {
+                pos: 12, car: "21", name: "Gavan Boschele", series: "LATE_MODEL",
+                token: "gp_3w84",
+                score: 265.0, maxScore: 295.0, gap: -28.5,
+                scPts: 142.0, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 90.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 80.4, completenessPts: 82.0,
+                pips: ["full", "partial", "full", "partial", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Good effort from the Late Model group. Needs tighter logging on dumbbell circuits."
+            },
+            {
+                pos: 13, car: "1", name: "Kris Wright", series: "ARCA",
+                token: "kh_7t61",
+                score: 259.5, maxScore: 295.0, gap: -34.0,
+                scPts: 136.5, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 90.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 75.0, completenessPts: 76.5,
+                pips: ["full", "full", "partial", "partial", "partial", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Attendance clean (6/6). Card fidelity needs improvement on accessory supersets."
+            },
+            {
+                pos: 14, car: "11", name: "Corey Heim", series: "NASCAR",
+                token: "ch_5j23",
+                score: 248.0, maxScore: 295.0, gap: -45.5,
+                scPts: 138.0, recoveryPts: 10.0, compPts: 20.0, hydrationPts: 80.0,
+                attendancePts: 60.0, sessionsAttended: 6, totalSessions: 6,
+                completenessPct: 76.5, completenessPts: 78.0,
+                pips: ["full", "full", "full", "full", "partial", "full"],
+                isRemote: true, polarVerified: true,
+                coachNote: "Travel session logged on Two-a-Days Remote calendar with verified Polar HR tracking."
+            },
+            {
+                pos: 15, car: "15", name: "Sean Hingorani", series: "ARCA",
+                token: "sh_8r49",
+                score: 231.0, maxScore: 295.0, gap: -62.5,
+                scPts: 128.0, recoveryPts: 13.0, compPts: 0.0, hydrationPts: 90.0,
+                attendancePts: 50.0, sessionsAttended: 5, totalSessions: 6,
+                completenessPct: 76.5, completenessPts: 78.0,
+                pips: ["full", "full", "full", "missed", "full", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Missed Friday Competition due to travel conflict; currently 5.0 pts below cutline."
+            },
+            {
+                pos: 16, car: "18", name: "William Sawalich", series: "NASCAR",
+                token: "ws_2v74",
+                score: 225.5, maxScore: 295.0, gap: -68.0,
+                scPts: 122.5, recoveryPts: 13.0, compPts: 20.0, hydrationPts: 70.0,
+                attendancePts: 55.0, sessionsAttended: 5, totalSessions: 6,
+                completenessPct: 71.0, completenessPts: 67.5,
+                pips: ["full", "partial", "full", "partial", "partial", "full"],
+                isRemote: true, polarVerified: false,
+                coachNote: "Remote workout card logged but Polar HR unverified (-5.0 pt deduction). Tier 3 hydration."
+            },
+            {
+                pos: 17, car: "2", name: "Jesse Love", series: "NASCAR",
+                token: "jl_9m12",
+                score: 218.0, maxScore: 295.0, gap: -75.5,
+                scPts: 118.0, recoveryPts: 10.0, compPts: 20.0, hydrationPts: 70.0,
+                attendancePts: 50.0, sessionsAttended: 5, totalSessions: 6,
+                completenessPct: 66.7, completenessPts: 68.0,
+                pips: ["full", "missed", "full", "partial", "partial", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Missed Tuesday PM conditioning. Card logging lagged on auxiliary neck work."
+            },
+            {
+                pos: 18, car: "08", name: "Cannon McIntosh", series: "LATE_MODEL",
+                token: "cm_4p65",
+                score: 211.0, maxScore: 295.0, gap: -82.5,
+                scPts: 106.0, recoveryPts: 10.0, compPts: 20.0, hydrationPts: 75.0,
+                attendancePts: 40.0, sessionsAttended: 4, totalSessions: 6,
+                completenessPct: 68.3, completenessPts: 66.0,
+                pips: ["missed", "missed", "full", "full", "partial", "full"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Arrived mid-week due to national sprint race schedule. Fast recovery pace, needs makeup card."
+            },
+            {
+                pos: 19, car: "61", name: "Jacob Denney", series: "LATE_MODEL",
+                token: "jd_7n38",
+                score: 196.5, maxScore: 295.0, gap: -97.0,
+                scPts: 101.5, recoveryPts: 10.0, compPts: 20.0, hydrationPts: 65.0,
+                attendancePts: 40.0, sessionsAttended: 4, totalSessions: 6,
+                completenessPct: 64.2, completenessPts: 61.5,
+                pips: ["missed", "missed", "full", "partial", "partial", "partial"],
+                isRemote: false, polarVerified: true,
+                coachNote: "Late arrival. Needs structured onboarding on entering workout loads and hydration timing."
+            }
+        ];
+
+        // Global State & Scoring Constants (CQ 295 pt System)
+        let currentWeek = 1;
+        const WEEKLY_MAX_PTS = 295.0;
+        const CUTLINE_RATIO = 0.80; // 80.0% qualifying cut line
+
+        function getMaxPossible() {
+            return WEEKLY_MAX_PTS * currentWeek;
+        }
+
+        function getCutlineThreshold() {
+            return getMaxPossible() * CUTLINE_RATIO;
+        }
+
+        let currentFilter = 'ALL';
+        let expandedDrivers = new Set();
+        let formColumnHidden = false;
+        let selectedMobileDriverPos = 2; // Default to Isabella Robusto
+
+        function selectWeek(weekNum) {
+            currentWeek = weekNum;
+            document.querySelectorAll('.week-btn').forEach((b, idx) => {
+                if (idx + 1 === weekNum) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            const pill = document.getElementById('cutlineRulePill');
+            if (pill) {
+                pill.innerText = `⚡ 80% Cut Line = ${Math.round(getCutlineThreshold())} pts (W${currentWeek})`;
+            }
+            const ticker = document.getElementById('tickerText');
+            if (ticker) {
+                ticker.innerHTML = `<strong>OFF-SEASON S&C:</strong> Week ${currentWeek} • Cohort: 19 Drivers • Cut Line: 80% (${Math.round(getCutlineThreshold())} pts) • Max: ${Math.round(getMaxPossible())} pts • Leader: Westin Workman (${Math.round(DRIVERS_DATA[0].score * currentWeek)} pts)`;
+            }
+            renderPodium();
+            renderTable();
+            if (document.getElementById('mobileViewContainer').classList.contains('active')) {
+                renderMobileSnapshot(selectedMobileDriverPos);
+            }
+        }
+
+        // Authentication & Privacy State
+        // No universal master PIN; athlete access uses unique tokens
+        const STAFF_PORTAL_KEY = "tpc_coach_admin_2026";
+        let isCoachUnlocked = false;
+        let currentAuthDriver = null; // null = public view, or athlete object when logged in
+
+        // TV Broadcast Carousel State
+        const TV_SLIDES = [
+            { key: 'ALL', title: 'ALL SERIES (OVERALL FIELD)' },
+            { key: 'NASCAR', title: 'NASCAR CUP & XFINITY' },
+            { key: 'ARCA', title: 'ARCA MENARDS SERIES' },
+            { key: 'GT4', title: 'GT4 TOYOTA GAZOO RACING' },
+            { key: 'LATE_MODEL', title: 'LATE MODEL DEVELOPMENT' }
+        ];
+        let tvSlideIndex = 0;
+        let tvInterval = null;
+        let tvProgressInterval = null;
+        let tvProgressPercent = 0;
+        let isTvPlaying = false;
+        const SLIDE_DURATION_MS = 12000; // 12 seconds per slide
+
+        const sessionNames = [
+            "Mon AM (Lower Body Strength)",
+            "Mon PM (Upper Body Hypertrophy)",
+            "Tue AM (Lower Body Power)",
+            "Tue PM (Metabolic Conditioning)",
+            "Wed AM (Recovery & Mobility)",
+            "Thu AM (Full Body Armor)"
+        ];
+
+        // Render Top 3 Leaders (Podium)
+        function renderPodium() {
+            const strip = document.getElementById('podiumStrip');
+            const top3 = DRIVERS_DATA.slice(0, 3);
+
+            let html = '';
+            top3.forEach((d, idx) => {
+                const rankText = idx === 0 ? "P1" : idx === 1 ? "P2" : "P3";
+                const isP1 = idx === 0;
+
+                html += `
+                    <div class="podium-card ${isP1 ? 'p1' : ''}" onclick="showDriverDetails(${d.pos})">
+                        <div class="podium-rank">${rankText}</div>
+                        <div class="podium-info">
+                            <div class="podium-name">
+                                <span class="car-badge-large">${d.car}</span>
+                                <span>${d.name.toUpperCase()}</span>
+                            </div>
+                            <div class="podium-stats">
+                                <span>${d.series}</span>
+                                <span>•</span>
+                                <span>${d.sessionsAttended * currentWeek}/${d.totalSessions * currentWeek} Attended</span>
+                                <span>•</span>
+                                <span>${d.completenessPct}% Logged</span>
+                            </div>
+                        </div>
+                        <div class="podium-score">
+                            <div class="podium-score-val">${Math.round(d.score * currentWeek)}</div>
+                            <div class="podium-score-max">/ ${Math.round(getMaxPossible())} PTS</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            strip.innerHTML = html;
+        }
+
+        // Render NASCAR Timing & Scoring Table (With Wayne's Cut Line & Collapsible Details)
+        function renderTable() {
+            const container = document.getElementById('standingsRows');
+            let filtered = DRIVERS_DATA;
+            if (currentFilter !== 'ALL') {
+                filtered = DRIVERS_DATA.filter(d => d.series === currentFilter);
+            }
+
+            let html = '';
+            let cutLineRendered = false;
+
+            const cutlinePts = getCutlineThreshold();
+            const maxPts = getMaxPossible();
+
+            filtered.forEach((d) => {
+                const scaledScore = Math.round(d.score * currentWeek);
+                const scaledGap = Math.round(d.gap * currentWeek);
+                const isQualified = scaledScore >= cutlinePts;
+
+                // Render Cut Line divider when score drops below cutlinePts
+                if (!cutLineRendered && scaledScore < cutlinePts) {
+                    const qualifiedCount = filtered.filter(x => Math.round(x.score * currentWeek) >= cutlinePts).length;
+                    const belowCount = filtered.filter(x => Math.round(x.score * currentWeek) < cutlinePts).length;
+
+                    html += `
+                        <div class="cutline-divider">
+                            <div class="cutline-left">
+                                <span>⚡ 2026 OFF-SEASON T-SHIRT CUT LINE — 80% QUALIFYING THRESHOLD (${Math.round(cutlinePts)} PTS • WEEK ${currentWeek})</span>
+                            </div>
+                            <div class="cutline-right">
+                                <span class="cutline-pill qualified">▲ ${qualifiedCount} QUALIFYING</span>
+                                <span class="cutline-pill below">${belowCount} BELOW CUT LINE ▼</span>
+                            </div>
+                        </div>
+                    `;
+                    cutLineRendered = true;
+                }
+
+                const isP1 = d.pos === 1;
+                const isPodium = d.pos <= 3;
+                const isDanger = scaledGap < -40;
+                const isExpanded = expandedDrivers.has(d.pos);
+                const attPct = d.totalSessions > 0 ? Math.round((d.sessionsAttended / d.totalSessions) * 100) : 0;
+                const goalProgress = Math.min(100, Math.round((scaledScore / cutlinePts) * 100));
+
+                html += `
+                    <div class="board-row ${isP1 ? 'p1' : ''} ${isPodium ? 'podium' : ''} ${!isQualified ? 'below-cutline' : ''} ${isExpanded ? 'expanded' : ''}" onclick="toggleDriverRow(${d.pos}, event)">
+                        <div class="cell-pos">P${d.pos}</div>
+                        <div>
+                            <div class="car-badge">${d.car}</div>
+                        </div>
+                        <div class="cell-driver">
+                            <div class="driver-name">
+                                <span>${d.name.toUpperCase()}</span>
+                                ${isQualified 
+                                    ? `<span style="font-size: 11px; color: var(--green); font-family: var(--font-mono); font-weight: 700;">✔ On Pace (+${scaledScore - Math.round(cutlinePts)} pts)</span>` 
+                                    : `<span style="font-size: 11px; color: var(--red); font-family: var(--font-mono); font-weight: 700;">Needs +${Math.round(cutlinePts) - scaledScore} pts</span>`
+                                }
+                            </div>
+                            <div class="driver-series">
+                                <span class="series-tag">${d.series}</span>
+                                <span>${d.sessionsAttended * currentWeek}/${d.totalSessions * currentWeek} Sessions</span>
+                                ${d.isRemote ? (d.polarVerified ? `<span style="font-size: 10px; color: var(--cyan); font-family: var(--font-mono); font-weight: 600;">📡 Remote (Polar ✔)</span>` : `<span style="font-size: 10px; color: var(--red); font-family: var(--font-mono); font-weight: 600;">📡 Remote (Polar -5pt ⚠)</span>`) : ''}
+                                <div class="cutline-progress-wrap" title="${goalProgress}% toward 80% shirt goal">
+                                    <div class="cutline-progress-bar ${isQualified ? 'qualified' : ''}" style="width: ${goalProgress}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell-score">
+                            <span class="score-val">${scaledScore}</span><span class="score-slash">/</span><span class="score-max">${Math.round(maxPts)}</span>
+                        </div>
+                        <div class="cell-gap">
+                            ${isP1 
+                                ? `<span class="gap-leader">LEADER</span>` 
+                                : `<span class="${isDanger ? 'gap-danger' : 'gap-behind'}">${scaledGap}</span>`
+                            }
+                        </div>
+                        <div class="cell-att col-att">
+                            ${Math.round(d.attendancePts * currentWeek)} pts
+                            <div class="progress-subtext">${attPct}% att (${d.sessionsAttended * currentWeek}/${d.totalSessions * currentWeek})</div>
+                        </div>
+                        <div class="cell-comp col-comp">
+                            ${Math.round(d.completenessPts * currentWeek)} pts
+                            <div class="progress-subtext" style="color: ${d.completenessPct >= 85 ? 'var(--green)' : 'var(--gold)'};">${d.completenessPct}% logged</div>
+                        </div>
+                        <div class="cell-trend col-trend">
+                            ${d.pips.map(p => `<span class="session-pip ${p}"></span>`).join('')}
+                        </div>
+                        <div class="cell-action">
+                            ${(isCoachUnlocked || (currentAuthDriver && currentAuthDriver.pos === d.pos)) ? `
+                                <button class="btn-details" onclick="toggleDriverRow(${d.pos}, event)" style="${currentAuthDriver && currentAuthDriver.pos === d.pos ? 'border-color: var(--green); color: var(--green);' : ''}">
+                                    ${isExpanded ? 'Close ▲' : (currentAuthDriver && currentAuthDriver.pos === d.pos ? 'My Card ▾' : 'Details ▾')}
+                                </button>
+                            ` : `
+                                <button class="btn-details" style="color: var(--text-muted); opacity: 0.8;" onclick="openPinModal(${d.pos})" title="Private Athlete Card — Click your direct Teamworks magic link to unlock">
+                                    🔒 Locked
+                                </button>
+                            `}
+                        </div>
+                    </div>
+
+                    <!-- Collapsible Inline Drawer for Coach & Granular Review -->
+                    <div class="details-drawer ${isExpanded ? 'open' : ''}" id="drawer-${d.pos}">
+                        <div class="drawer-header">
+                            <div class="drawer-title">
+                                <span>#${d.car} ${d.name.toUpperCase()} — Granular Points & Departmental Breakdown</span>
+                                <span class="series-tag">${d.series}</span>
+                                ${d.isRemote ? (d.polarVerified ? `<span style="font-size: 11px; color: var(--cyan); font-family: var(--font-mono);">📡 Two-a-Days Remote (Polar Verified ✔)</span>` : `<span style="font-size: 11px; color: var(--red); font-family: var(--font-mono);">📡 Two-a-Days Remote (Polar Missing -5pt ⚠)</span>`) : `<span style="font-size: 11px; color: var(--green); font-family: var(--font-mono);">🏢 TPC In-Gym Resident</span>`}
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn" style="padding: 2px 8px; font-size: 10px;" onclick="openDriverMobileDirect(${d.pos})">📱 Open Mobile View</button>
+                            </div>
+                        </div>
+
+                        <!-- 4 Departmental Sub-Score Breakdown Cards -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 12px 0;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 10px; text-align: center;">
+                                <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-display); text-transform: uppercase;">🏋️ S&C Sessions</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--gold); font-family: var(--font-mono); margin-top: 2px;">${Math.round(d.scPts * currentWeek)} <span style="font-size: 11px; color: var(--text-muted);">/ ${Math.round(162 * currentWeek)}</span></div>
+                                <div style="font-size: 10px; color: #9ca3af; margin-top: 2px;">${d.sessionsAttended * currentWeek}/${d.totalSessions * currentWeek} Attended • ${d.completenessPct}% Card</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 10px; text-align: center;">
+                                <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-display); text-transform: uppercase;">🧘 Yoga & Recovery</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--cyan); font-family: var(--font-mono); margin-top: 2px;">${Math.round(d.recoveryPts * currentWeek)} <span style="font-size: 11px; color: var(--text-muted);">/ ${Math.round(13 * currentWeek)}</span></div>
+                                <div style="font-size: 10px; color: #9ca3af; margin-top: 2px;">Wed Yoga & Recovery Log</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 10px; text-align: center;">
+                                <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-display); text-transform: uppercase;">🏁 Friday Comp</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--green); font-family: var(--font-mono); margin-top: 2px;">${Math.round(d.compPts * currentWeek)} <span style="font-size: 11px; color: var(--text-muted);">/ ${Math.round(20 * currentWeek)}</span></div>
+                                <div style="font-size: 10px; color: #9ca3af; margin-top: 2px;">Hub Check-In Event</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 10px; text-align: center;">
+                                <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-display); text-transform: uppercase;">💧 USG Hydration</div>
+                                <div style="font-size: 18px; font-weight: 700; color: #60a5fa; font-family: var(--font-mono); margin-top: 2px;">${Math.round(d.hydrationPts * currentWeek)} <span style="font-size: 11px; color: var(--text-muted);">/ ${Math.round(100 * currentWeek)}</span></div>
+                                <div style="font-size: 10px; color: #9ca3af; margin-top: 2px;">Mon/Thu Hydration Tiers</div>
+                            </div>
+                        </div>
+
+                        <div class="drawer-sessions-grid">
+                            ${d.pips.map((pip, idx) => {
+                                let statusLabel = "100% Completed";
+                                let statusColor = "var(--green)";
+                                let detailText = "10.0 pts Attended • 10.0 pts Logged";
+                                if (pip === "partial") {
+                                    statusLabel = "Partial Logged";
+                                    statusColor = "var(--gold)";
+                                    detailText = "10.0 pts Attended • Missing accessory weights";
+                                } else if (pip === "missed") {
+                                    statusLabel = "Session Missed";
+                                    statusColor = "var(--red)";
+                                    detailText = "0.0 pts Attendance • 0% logged";
+                                }
+                                return `
+                                    <div class="drawer-session-card">
+                                        <div class="drawer-session-title">
+                                            <span>${sessionNames[idx] || `Session ${idx + 1}`}</span>
+                                            <span style="color: ${statusColor};">${statusLabel}</span>
+                                        </div>
+                                        <div class="drawer-session-meta">${detailText}</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+
+                        <div class="drawer-note">
+                            <div><strong>Wayne's Coaching Observation:</strong> ${d.coachNote}</div>
+                            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--gold); white-space: nowrap;">
+                                ${isQualified ? '✔ On Pace for Shirt' : '⚠ Below 80% Threshold'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Toggle Single Driver Row Drawer
+        function toggleDriverRow(pos, event) {
+            if (event) event.stopPropagation();
+            if (expandedDrivers.has(pos)) {
+                expandedDrivers.delete(pos);
+            } else {
+                expandedDrivers.add(pos);
+            }
+            renderTable();
+        }
+
+        // Toggle All Details (Coach view quick control)
+        function toggleAllDetails() {
+            if (expandedDrivers.size > 0) {
+                expandedDrivers.clear();
+            } else {
+                DRIVERS_DATA.forEach(d => expandedDrivers.add(d.pos));
+            }
+            renderTable();
+        }
+
+        // Toggle Form Column (Show/Hide Form Column for cleaner view)
+        function toggleFormColumn() {
+            formColumnHidden = !formColumnHidden;
+            const container = document.body;
+            const btn = document.getElementById('toggleFormColBtn');
+            if (formColumnHidden) {
+                container.classList.add('hide-form');
+                btn.innerText = "👁️ Show Form";
+                btn.classList.add('active');
+            } else {
+                container.classList.remove('hide-form');
+                btn.innerText = "👁️ Form Cards";
+                btn.classList.remove('active');
+            }
+        }
+
+        // Filter by Series (Preserving Overall NASCAR Position)
+        // Dropdown Navigation Controls
+        function toggleDropdown(id, e) {
+            if (e) e.stopPropagation();
+            const el = document.getElementById(id);
+            const isOpen = el.classList.contains('show');
+            closeAllDropdowns();
+            if (!isOpen) {
+                el.classList.add('show');
+            }
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                closeAllDropdowns();
+            }
+        });
+
+        function filterSeries(series, btn) {
+            currentFilter = series;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            renderTable();
+        }
+
+        // Rolling TV Broadcast Screen Mode (Carousel)
+        function toggleTvMode() {
+            const bar = document.getElementById('tvBroadcastBar');
+            if (bar.classList.contains('active')) {
+                exitTvMode();
+            } else {
+                enterTvMode();
+            }
+        }
+
+        function enterTvMode() {
+            const bar = document.getElementById('tvBroadcastBar');
+            bar.classList.add('active');
+            document.getElementById('tvModeBtn').classList.add('active');
+            tvSlideIndex = 0;
+            isTvPlaying = true;
+            document.getElementById('tvPlayPauseBtn').innerText = "⏸ Pause";
+            showTvSlide(tvSlideIndex);
+            startTvTimer();
+        }
+
+        function exitTvMode() {
+            const bar = document.getElementById('tvBroadcastBar');
+            bar.classList.remove('active');
+            document.getElementById('tvModeBtn').classList.remove('active');
+            stopTvTimer();
+            filterSeries('ALL', document.querySelector('.filter-btn'));
+        }
+
+        function startTvTimer() {
+            stopTvTimer();
+            tvProgressPercent = 0;
+            document.getElementById('tvProgressFill').style.width = '0%';
+
+            tvProgressInterval = setInterval(() => {
+                tvProgressPercent += (100 / (SLIDE_DURATION_MS / 100));
+                if (tvProgressPercent > 100) tvProgressPercent = 100;
+                document.getElementById('tvProgressFill').style.width = tvProgressPercent + '%';
+            }, 100);
+
+            tvInterval = setInterval(() => {
+                nextTvSlide();
+            }, SLIDE_DURATION_MS);
+        }
+
+        function stopTvTimer() {
+            if (tvInterval) clearInterval(tvInterval);
+            if (tvProgressInterval) clearInterval(tvProgressInterval);
+            tvInterval = null;
+            tvProgressInterval = null;
+        }
+
+        function toggleTvPlayback() {
+            const btn = document.getElementById('tvPlayPauseBtn');
+            if (isTvPlaying) {
+                stopTvTimer();
+                isTvPlaying = false;
+                btn.innerText = "▶ Resume";
+            } else {
+                isTvPlaying = true;
+                btn.innerText = "⏸ Pause";
+                startTvTimer();
+            }
+        }
+
+        function showTvSlide(idx) {
+            const slide = TV_SLIDES[idx];
+            document.getElementById('tvSlideTitleText').innerText = slide.title;
+            document.getElementById('tvSlideBadge').innerText = `SLIDE ${idx + 1}/${TV_SLIDES.length}`;
+
+            // Filter series while preserving overall field position
+            currentFilter = slide.key;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                if (b.innerText.toUpperCase().includes(slide.key) || (slide.key === 'ALL' && b.innerText.includes('All'))) {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+            renderTable();
+        }
+
+        function nextTvSlide() {
+            tvSlideIndex = (tvSlideIndex + 1) % TV_SLIDES.length;
+            showTvSlide(tvSlideIndex);
+            if (isTvPlaying) startTvTimer();
+        }
+
+        function prevTvSlide() {
+            tvSlideIndex = (tvSlideIndex - 1 + TV_SLIDES.length) % TV_SLIDES.length;
+            showTvSlide(tvSlideIndex);
+            if (isTvPlaying) startTvTimer();
+        }
+
+        function toggleTvFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
+        // Athlete Mobile Snapshot View (Private "Me vs. Me" Mode)
+        function toggleMobileView() {
+            const container = document.getElementById('mobileViewContainer');
+            const mainView = document.getElementById('mainDashboardView');
+            const btn = document.getElementById('mobileViewBtn');
+
+            if (container.classList.contains('active')) {
+                container.classList.remove('active');
+                mainView.style.display = 'block';
+                btn.classList.remove('active');
+            } else {
+                container.classList.add('active');
+                mainView.style.display = 'none';
+                btn.classList.add('active');
+                populateMobileSelect();
+                renderMobileSnapshot(selectedMobileDriverPos);
+            }
+        }
+
+        function openDriverMobileDirect(pos) {
+            selectedMobileDriverPos = pos;
+            const container = document.getElementById('mobileViewContainer');
+            const mainView = document.getElementById('mainDashboardView');
+            const btn = document.getElementById('mobileViewBtn');
+
+            container.classList.add('active');
+            mainView.style.display = 'none';
+            btn.classList.add('active');
+            populateMobileSelect();
+            renderMobileSnapshot(pos);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function populateMobileSelect() {
+            const select = document.getElementById('mobileDriverSelect');
+            if (currentAuthDriver) {
+                select.innerHTML = `<option value="${currentAuthDriver.pos}" selected>P${currentAuthDriver.pos} #${currentAuthDriver.car} ${currentAuthDriver.name} (🔒 Locked to You)</option>`;
+                select.disabled = true;
+            } else {
+                select.disabled = false;
+                select.innerHTML = DRIVERS_DATA.map(d => `
+                    <option value="${d.pos}" ${d.pos === selectedMobileDriverPos ? 'selected' : ''}>
+                        P${d.pos} #${d.car} ${d.name} (${d.series})
+                    </option>
+                `).join('');
+            }
+        }
+
+        function selectMobileDriver(posStr) {
+            selectedMobileDriverPos = parseInt(posStr, 10);
+            renderMobileSnapshot(selectedMobileDriverPos);
+        }
+
+        function renderMobileSnapshot(pos) {
+            // Privacy Gate Check: Unauthenticated drivers must enter PIN
+            if (!isCoachUnlocked && !currentAuthDriver) {
+                document.getElementById('mobileHeroContent').innerHTML = `
+                    <div class="pin-gate-card">
+                        <div style="font-size: 28px; margin-bottom: 8px;">🔒</div>
+                        <h2 style="font-family: var(--font-display); font-size: 16px; color: var(--gold); text-transform: uppercase;">
+                            Private Athlete Snapshot Access
+                        </h2>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
+                            Leaderboard rankings are public, but your individual workout cards, logging percentages, and coach notes are strictly private to you.
+                        </p>
+                        <div style="margin-top: 14px; text-align: left;">
+                            <label style="font-size: 10px; font-family: var(--font-display); color: var(--text-muted); text-transform: uppercase;">Select Your Name</label>
+                            <select id="gateAthleteSelect" style="width: 100%; background: #090a0d; color: #fff; border: 1px solid var(--border-light); font-size: 12px; padding: 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 12px; font-family: var(--font-body);">
+                                ${DRIVERS_DATA.map(x => `<option value="${x.pos}" ${x.pos === pos ? 'selected' : ''}>P${x.pos} #${x.car} ${x.name} (${x.series})</option>`).join('')}
+                            </select>
+                            <label style="font-size: 10px; font-family: var(--font-display); color: var(--text-muted); text-transform: uppercase;">Enter 4-Digit Athlete PIN</label>
+                            <div style="display: flex; gap: 8px; margin-top: 4px;">
+                                <input type="password" id="gatePinInput" maxlength="24" placeholder="e.g. ir_7x81" class="pin-input-field" style="flex: 1; margin: 0; padding: 6px 10px; font-size: 16px;">
+                                <button class="btn btn-gold" onclick="submitGateUnlock()">Unlock Card</button>
+                            </div>
+                            <div id="gateErrorMsg" style="font-size: 11px; color: var(--red); margin-top: 6px; display: none;">
+                                ⚠ Invalid PIN. Enter your 4-digit driver PIN.
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('mobileKpiContent').innerHTML = '';
+                document.getElementById('mobileSessionsList').innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px; font-size: 12px;">Unlock card above to view workout completion history.</div>';
+                document.getElementById('mobileCoachNoteBox').innerHTML = '<div style="color: var(--text-muted);">Coaching observations are hidden until authenticated.</div>';
+                return;
+            }
+
+            const targetPos = currentAuthDriver ? currentAuthDriver.pos : pos;
+            const d = DRIVERS_DATA.find(x => x.pos === targetPos) || DRIVERS_DATA[0];
+            const isQualified = d.score >= CUTLINE_PTS;
+            const goalPct = Math.min(100, Math.round((d.score / CUTLINE_PTS) * 100));
+
+            // Hero
+            document.getElementById('mobileHeroContent').innerHTML = `
+                <div class="mobile-car-large">#${d.car}</div>
+                <div class="mobile-driver-name">${d.name.toUpperCase()}</div>
+                <div class="mobile-standing-badge">
+                    <span>P${d.pos} Overall</span>
+                    <span>•</span>
+                    <span>${d.series}</span>
+                    <span>•</span>
+                    <span style="color: ${d.gap === 0 ? 'var(--gold)' : '#fff'};">${d.gap === 0 ? 'LEADER' : Math.round(d.gap) + ' pts'}</span>
+                </div>
+                <div style="margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-family: var(--font-display); margin-bottom: 4px;">
+                        <span>80% T-Shirt Incentive Goal</span>
+                        <span style="color: ${isQualified ? 'var(--green)' : 'var(--gold)'};">${goalPct}% (${Math.round(d.score)} / ${Math.round(CUTLINE_PTS)} pts)</span>
+                    </div>
+                    <div class="cutline-progress-wrap" style="height: 6px;">
+                        <div class="cutline-progress-bar ${isQualified ? 'qualified' : ''}" style="width: ${goalPct}%;"></div>
+                    </div>
+                    <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px; font-family: var(--font-mono);">
+                        ${isQualified ? '✔ On Pace to Earn 2026 Off-Season Shirt' : '⚠ Below Pace: Need +' + Math.round(CUTLINE_PTS - d.score) + ' pts to qualify'}
+                    </div>
+                </div>
+            `;
+
+            // KPIs with 4 Departmental Sub-Scores (Whole Numbers for Clean Big-Screen Display)
+            document.getElementById('mobileKpiContent').innerHTML = `
+                <div class="mobile-kpi-box">
+                    <div class="mobile-kpi-title">Total Points</div>
+                    <div class="mobile-kpi-val" style="color: var(--gold);">${Math.round(d.score * currentWeek)}</div>
+                    <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);">of ${Math.round(getMaxPossible())} max (W${currentWeek})</div>
+                </div>
+                <div class="mobile-kpi-box">
+                    <div class="mobile-kpi-title">🏋️ S&C Sessions</div>
+                    <div class="mobile-kpi-val" style="color: var(--gold);">${Math.round(d.scPts * currentWeek)}</div>
+                    <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);">of ${Math.round(162 * currentWeek)} max</div>
+                </div>
+                <div class="mobile-kpi-box">
+                    <div class="mobile-kpi-title">🧘 Yoga & Recovery</div>
+                    <div class="mobile-kpi-val" style="color: var(--cyan);">${Math.round(d.recoveryPts * currentWeek)}</div>
+                    <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);">of ${Math.round(13 * currentWeek)} max</div>
+                </div>
+                <div class="mobile-kpi-box">
+                    <div class="mobile-kpi-title">🏁 Friday Comp</div>
+                    <div class="mobile-kpi-val" style="color: var(--green);">${Math.round(d.compPts * currentWeek)}</div>
+                    <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);">of ${Math.round(20 * currentWeek)} max</div>
+                </div>
+                <div class="mobile-kpi-box">
+                    <div class="mobile-kpi-title">💧 USG Hydration</div>
+                    <div class="mobile-kpi-val" style="color: #60a5fa;">${Math.round(d.hydrationPts * currentWeek)}</div>
+                    <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);">of ${Math.round(100 * currentWeek)} max</div>
+                </div>
+                <div class="mobile-kpi-box">
+                    <div class="mobile-kpi-title">Deficit to P1</div>
+                    <div class="mobile-kpi-val" style="color: ${d.gap === 0 ? 'var(--gold)' : '#fff'};">${d.gap === 0 ? 'LEADER' : Math.round(d.gap * currentWeek)}</div>
+                    <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);">${d.gap === 0 ? 'P1 Pace' : 'Behind Westin'}</div>
+                </div>
+            `;
+
+            // Sessions list (Sunday to Saturday)
+            document.getElementById('mobileSessionsList').innerHTML = d.pips.map((pip, idx) => {
+                let tagClass = pip;
+                let tagText = pip === 'full' ? '100% Logged' : pip === 'partial' ? 'Partial' : 'Missed';
+                let subText = pip === 'full' 
+                    ? '10 pts Attended • Complete sets logged' 
+                    : pip === 'partial' 
+                        ? '10 pts Attended • Missing accessory loads' 
+                        : '0 pts • Unattended session';
+
+                return `
+                    <div class="mobile-session-row">
+                        <div class="mobile-session-left">
+                            <div class="mobile-session-name">${sessionNames[idx] || `Session ${idx + 1}`}</div>
+                            <div class="mobile-session-sub">${subText}</div>
+                        </div>
+                        <div class="mobile-session-tag ${tagClass}">${tagText}</div>
+                    </div>
+                `;
+            }).join('');
+
+            // Coach Note
+            document.getElementById('mobileCoachNoteBox').innerHTML = `
+                <div style="font-family: var(--font-display); font-weight: 700; color: var(--gold); margin-bottom: 4px; text-transform: uppercase;">
+                    Wayne's Coaching Note:
+                </div>
+                <div>${d.coachNote}</div>
+            `;
+        }
+
+        function copyDriverLink() {
+            const url = window.location.origin + window.location.pathname + '?driver=' + encodeURIComponent(DRIVERS_DATA.find(x => x.pos === selectedMobileDriverPos).name);
+            navigator.clipboard.writeText(url).then(() => {
+                alert("Copied personal snapshot link to clipboard!\n\n" + url);
+            }).catch(() => {
+                alert("Link: " + url);
+            });
+        }
+
+        // ==========================================
+        // ATHLETE PIN & COACH MASTER AUTHENTICATION
+        // ==========================================
+        function openPinModal(preselectPos) {
+            document.getElementById('pinModal').classList.add('active');
+            populatePinSelect(preselectPos || selectedMobileDriverPos);
+            updateAuthStatusBanner();
+            document.getElementById('pinInputBox').value = '';
+            document.getElementById('pinErrorMsg').style.display = 'none';
+        }
+
+        function closePinModal(e) {
+            if (e.target === document.getElementById('pinModal')) {
+                document.getElementById('pinModal').classList.remove('active');
+            }
+        }
+
+        function closePinModalDirect() {
+            document.getElementById('pinModal').classList.remove('active');
+        }
+
+        function populatePinSelect(preselectPos) {
+            const select = document.getElementById('pinAthleteSelect');
+            select.innerHTML = DRIVERS_DATA.map(d => `
+                <option value="${d.pos}" ${d.pos === preselectPos ? 'selected' : ''}>
+                    P${d.pos} #${d.car} ${d.name} (${d.series})
+                </option>
+            `).join('');
+        }
+
+        function updateAuthStatusBanner() {
+            const banner = document.getElementById('authStatusBanner');
+            const authBtn = document.getElementById('authBtn');
+            if (isCoachUnlocked) {
+                banner.innerHTML = `<span class="badge-coach-active">👑 COACH MASTER MODE ACTIVE — All Cards Unlocked</span>`;
+                if (authBtn) authBtn.innerHTML = `👑 Coach Mode`;
+            } else if (currentAuthDriver) {
+                banner.innerHTML = `<span class="badge-athlete-active">✔ Unlocked: #${currentAuthDriver.car} ${currentAuthDriver.name}</span>`;
+                if (authBtn) authBtn.innerHTML = `✔ #${currentAuthDriver.car} ${currentAuthDriver.name.split(' ')[0]}`;
+            } else {
+                banner.innerHTML = `<span style="font-size: 11px; color: var(--text-muted);">Status: Public Leaderboard Mode (Cards Locked)</span>`;
+                if (authBtn) authBtn.innerHTML = `🔑 Athlete Card`;
+            }
+        }
+
+        function submitPinUnlock() {
+            const pin = document.getElementById('pinInputBox').value.trim();
+            const pos = parseInt(document.getElementById('pinAthleteSelect').value, 10);
+            unlockWithPin(pin, pos);
+        }
+
+        function submitGateUnlock() {
+            const pin = document.getElementById('gatePinInput').value.trim();
+            const pos = parseInt(document.getElementById('gateAthleteSelect').value, 10);
+            unlockWithPin(pin, pos);
+        }
+
+        function unlockWithPin(inputKey, pos) {
+            const token = (inputKey || '').trim();
+            const errorMsg = document.getElementById('pinErrorMsg');
+            const gateErrorMsg = document.getElementById('gateErrorMsg');
+            if (errorMsg) errorMsg.style.display = 'none';
+            if (gateErrorMsg) gateErrorMsg.style.display = 'none';
+
+            if (!token) return;
+
+            // Staff / Coach Master Key
+            if (token === STAFF_PORTAL_KEY) {
+                isCoachUnlocked = true;
+                currentAuthDriver = null;
+                updateAuthStatusBanner();
+                closePinModalDirect();
+                renderTable();
+                populateMobileSelect();
+                renderMobileSnapshot(pos || selectedMobileDriverPos);
+                return;
+            }
+
+            // Driver Token Check (by pos + token, or direct token match)
+            const driver = DRIVERS_DATA.find(d => d.token === token) || 
+                           DRIVERS_DATA.find(d => d.pos === pos && d.token === token);
+            if (driver) {
+                currentAuthDriver = driver;
+                isCoachUnlocked = false;
+                selectedMobileDriverPos = driver.pos;
+                updateAuthStatusBanner();
+                closePinModalDirect();
+                renderTable();
+                populateMobileSelect();
+                renderMobileSnapshot(driver.pos);
+                return;
+            }
+
+            if (errorMsg) errorMsg.style.display = 'block';
+            if (gateErrorMsg) gateErrorMsg.style.display = 'block';
+        }
+
+        function lockDriverSession() {
+            isCoachUnlocked = false;
+            currentAuthDriver = null;
+            expandedDrivers.clear();
+            updateAuthStatusBanner();
+            renderTable();
+            populateMobileSelect();
+            renderMobileSnapshot(selectedMobileDriverPos);
+            closePinModalDirect();
+            alert("Session locked. Leaderboard returned to public timing & scoring view.");
+        }
+
+        // ==========================================
+        // SLIDE EXPORT AS PNG (1080p CANVAS)
+        // ==========================================
+        function openExportModal() {
+            document.getElementById('exportModal').classList.add('active');
+        }
+
+        function closeExportModal(e) {
+            if (e.target === document.getElementById('exportModal')) {
+                document.getElementById('exportModal').classList.remove('active');
+            }
+        }
+
+        function closeExportModalDirect() {
+            document.getElementById('exportModal').classList.remove('active');
+        }
+
+        async function exportCurrentSlidePng() {
+            const statusBox = document.getElementById('exportStatusBox');
+            if (statusBox) {
+                statusBox.style.display = 'block';
+                statusBox.textContent = '⏳ Rendering current slide PNG... Please wait.';
+            }
+            if (typeof html2canvas === 'undefined') {
+                alert("html2canvas library is loading or offline.\n\nFallback: Press Ctrl+P or Win+Shift+S to capture native 1080p.");
+                if (statusBox) statusBox.style.display = 'none';
+                return;
+            }
+            try {
+                const targetEl = document.getElementById('mainDashboardView');
+                const canvas = await html2canvas(targetEl, {
+                    backgroundColor: '#090a0d',
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+                const link = document.createElement('a');
+                const seriesTitle = currentFilter === 'ALL' ? 'All_Series' : currentFilter;
+                link.download = `TPC_TwoADays_Standings_${seriesTitle}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                if (statusBox) {
+                    statusBox.textContent = `✔ Downloaded TPC_TwoADays_Standings_${seriesTitle}.png successfully!`;
+                    setTimeout(() => { statusBox.style.display = 'none'; }, 4000);
+                }
+            } catch (err) {
+                console.error("Export error:", err);
+                alert("Could not generate PNG automatically. Use Win+Shift+S or Ctrl+P as fallback.");
+                if (statusBox) statusBox.style.display = 'none';
+            }
+        }
+
+        async function batchExportAllSlidesPng() {
+            const statusBox = document.getElementById('exportStatusBox');
+            if (statusBox) {
+                statusBox.style.display = 'block';
+                statusBox.textContent = '⏳ Starting batch export of all 5 TV slides...';
+            }
+            if (typeof html2canvas === 'undefined') {
+                alert("html2canvas library is not loaded. Ensure internet connection is active for CDN, or use manual screenshots.");
+                if (statusBox) statusBox.style.display = 'none';
+                return;
+            }
+
+            const originalFilter = currentFilter;
+            const slidesToExport = [
+                { key: 'ALL', name: 'Slide_1_All_Series' },
+                { key: 'NASCAR', name: 'Slide_2_NASCAR' },
+                { key: 'ARCA', name: 'Slide_3_ARCA' },
+                { key: 'GT4', name: 'Slide_4_GT4' },
+                { key: 'LATE_MODEL', name: 'Slide_5_Late_Model' }
+            ];
+
+            for (let i = 0; i < slidesToExport.length; i++) {
+                const slide = slidesToExport[i];
+                if (statusBox) {
+                    statusBox.textContent = `⏳ Capturing [${i + 1}/5] ${slide.name}...`;
+                }
+                currentFilter = slide.key;
+                renderPodium();
+                renderTable();
+                await new Promise(r => setTimeout(r, 400));
+
+                const targetEl = document.getElementById('mainDashboardView');
+                const canvas = await html2canvas(targetEl, {
+                    backgroundColor: '#090a0d',
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+
+                const link = document.createElement('a');
+                link.download = `TPC_TwoADays_${slide.name}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                await new Promise(r => setTimeout(r, 600));
+            }
+
+            currentFilter = originalFilter;
+            renderPodium();
+            renderTable();
+            if (statusBox) {
+                statusBox.textContent = '✔ All 5 slides exported and downloaded successfully!';
+                setTimeout(() => { statusBox.style.display = 'none'; }, 5000);
+            }
+        }
+
+        // ==========================================
+        // TEAMWORKS AMS BLAST & DIRECT LINKS
+        // ==========================================
+        function openTeamworksModal() {
+            document.getElementById('teamworksModal').classList.add('active');
+            populateTeamworksData();
+        }
+
+        function closeTeamworksModal(e) {
+            if (e.target === document.getElementById('teamworksModal')) {
+                document.getElementById('teamworksModal').classList.remove('active');
+            }
+        }
+
+        function closeTeamworksModalDirect() {
+            document.getElementById('teamworksModal').classList.remove('active');
+        }
+
+        function getDeploymentBaseUrl() {
+            const input = document.getElementById('deploymentBaseUrlInput');
+            if (input && input.value.trim()) {
+                return input.value.trim().replace(/\/$/, '');
+            }
+            if (window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith("file:")) {
+                const path = window.location.pathname.replace(/index\.html$/, '').replace(/standings\.html$/, '');
+                return window.location.origin + path.replace(/\/$/, '');
+            }
+            return "https://tpc-standings.pages.dev";
+        }
+
+        function populateTeamworksData() {
+            const baseUrl = getDeploymentBaseUrl();
+
+            const broadcastText = `🚨 TOYOTA PERFORMANCE CENTER — S&C CUP SERIES UPDATE\n\n` +
+                `Off-season two-a-days Week 1 results are officially posted on the timing & scoring board!\n\n` +
+                `Public Leaderboard: ${baseUrl}\n` +
+                `Current Leader: #55 Westin Workman (293.5 / 295.0 pts)\n` +
+                `Cut Line: 80.0% compliance (236.0 pts) for the 2026 Off-Season Shirt.\n\n` +
+                `Tap your private magic link below to view your personalized workout card fidelity and Wayne's coaching notes (no password required).`;
+
+            document.getElementById('broadcastTextArea').value = broadcastText;
+
+            const tbody = document.getElementById('blastTableBody');
+            tbody.innerHTML = DRIVERS_DATA.map(d => {
+                const directLink = `${baseUrl}/?t=${d.token}`;
+                return `
+                    <tr>
+                        <td><strong>${d.name}</strong></td>
+                        <td><span class="car-badge" style="width: 22px; height: 22px; font-size: 11px;">${d.car}</span></td>
+                        <td><span class="series-tag">${d.series}</span></td>
+                        <td><code style="color: var(--gold); font-family: var(--font-mono);">${d.token}</code></td>
+                        <td><a href="${directLink}" target="_blank" style="color: var(--cyan); text-decoration: none; font-size: 10px;">${directLink}</a></td>
+                        <td>
+                            <button class="btn" style="padding: 2px 6px; font-size: 10px;" onclick="copySingleAthleteText('${d.name}', '${d.car}', '${d.token}', '${directLink}')">Copy Text</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function copyBroadcastText() {
+            const txt = document.getElementById('broadcastTextArea').value;
+            navigator.clipboard.writeText(txt).then(() => {
+                alert("Copied Team Broadcast Announcement to clipboard!");
+            });
+        }
+
+        function copySingleAthleteText(name, car, token, link) {
+            const msg = `Hey ${name}, your S&C Two-a-Days card is updated! Tap your private link to check your rank, workout fidelity, and coach note: ${link}`;
+            navigator.clipboard.writeText(msg).then(() => {
+                alert(`Copied direct message for #${car} ${name} to clipboard!`);
+            });
+        }
+
+        function copyAllAthleteLinksCsv() {
+            const baseUrl = getDeploymentBaseUrl();
+            let csv = "Driver,Car,Series,Token,Direct_Magic_URL\n";
+            DRIVERS_DATA.forEach(d => {
+                csv += `"${d.name}","${d.car}","${d.series}","${d.token}","${baseUrl}/?t=${d.token}"\n`;
+            });
+            navigator.clipboard.writeText(csv).then(() => {
+                alert("Copied all 19 athlete magic links as CSV to clipboard!");
+            });
+        }
+
+        // Check URL Parameters on Load for Magic Link Token & Staff Auth
+        function checkUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const tokenParam = params.get('token') || params.get('t') || params.get('pin');
+            const staffParam = params.get('staff') || params.get('coach');
+            const driverParam = params.get('driver') || params.get('name');
+            const posParam = params.get('pos') || params.get('id');
+
+            // 1. Staff Master Key Link
+            if (staffParam === STAFF_PORTAL_KEY || tokenParam === STAFF_PORTAL_KEY) {
+                unlockWithPin(STAFF_PORTAL_KEY);
+                return;
+            }
+
+            // 2. Athlete Magic Link Token Auth
+            if (tokenParam) {
+                const driver = DRIVERS_DATA.find(d => d.token === tokenParam);
+                if (driver) {
+                    unlockWithPin(tokenParam, driver.pos);
+                    if (window.innerWidth <= 768) {
+                        const mobileContainer = document.getElementById('mobileViewContainer');
+                        if (!mobileContainer.classList.contains('active')) {
+                            toggleMobileView();
+                        }
+                    }
+                    return;
+                }
+            }
+
+            // 3. Pre-select driver in mobile view
+            if (driverParam) {
+                const found = DRIVERS_DATA.find(d => d.name.toLowerCase().includes(driverParam.toLowerCase()) || d.token === driverParam);
+                if (found) {
+                    openDriverMobileDirect(found.pos);
+                    return;
+                }
+            }
+            if (posParam) {
+                const p = parseInt(posParam, 10);
+                const found = DRIVERS_DATA.find(d => d.pos === p || d.car === String(posParam));
+                if (found) {
+                    openDriverMobileDirect(found.pos);
+                    return;
+                }
+            }
+        }
+
+        // Rules Modal Handlers
+        function openRulesModal() {
+            document.getElementById('rulesModal').classList.add('active');
+        }
+
+        function closeRulesModal(e) {
+            document.getElementById('rulesModal').classList.remove('active');
+        }
+
+        function closeRulesDirect() {
+            document.getElementById('rulesModal').classList.remove('active');
+        }
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('clockDisplay').innerText = `LOCAL: ${timeStr} EST`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Initial Load
+        renderPodium();
+        renderTable();
+        checkUrlParams();
+    </script>
+</body>
+</html>

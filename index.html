@@ -2225,7 +2225,7 @@
                         <div class="cell-action">
                             ${(isCoachUnlocked || (currentAuthDriver && currentAuthDriver.pos === d.pos)) ? `
                                 <button class="btn-details" onclick="toggleDriverRow(${d.pos}, event)" style="${currentAuthDriver && currentAuthDriver.pos === d.pos ? 'border-color: var(--green); color: var(--green);' : ''}">
-                                    ${isExpanded ? 'Close ▲' : (currentAuthDriver && currentAuthDriver.pos === d.pos ? 'My Card ▾' : 'Details ▾')}
+                                    ${isExpanded ? 'Close ▲' : 'Details ▾'}
                                 </button>
                             ` : `
                                 <button class="btn-details" style="color: var(--text-muted); opacity: 0.8;" onclick="openPinModal(${d.pos})" title="Private Athlete Card — Click your direct Teamworks magic link to unlock">

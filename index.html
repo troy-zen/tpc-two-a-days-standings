@@ -1351,15 +1351,23 @@
             }
             .brand-container {
                 width: 100%;
-                gap: 10px;
+                gap: 12px;
+                align-items: flex-start;
             }
             .tpc-logo {
-                height: 28px;
+                height: 30px;
+                flex-shrink: 0;
+            }
+            .title-group {
+                flex: 1;
+                min-width: 0;
             }
             .title-group h1 {
-                font-size: 16px;
+                font-size: clamp(18px, 6.2vw, 30px);
                 gap: 6px;
-                flex-wrap: wrap;
+                white-space: nowrap;
+                width: 100%;
+                letter-spacing: 0.04em;
             }
             .subtitle {
                 font-size: 10px;

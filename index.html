@@ -1623,7 +1623,7 @@
     </main>
 
     <!-- Docked Bottom Series Bar -->
-    <nav class="bottom-series-bar" id="bottomSeriesBar">
+    <nav class="bottom-series-bar" id="bottomSeriesBar" style="display: none;">
         <span class="series-nav-label">🏆 SERIES:</span>
         <button class="filter-btn active" onclick="filterSeries('ALL', this)">All Series</button>
         <button class="filter-btn" onclick="filterSeries('CUP', this)">NASCAR Cup</button>
@@ -2168,8 +2168,6 @@
                                 <span>${d.name.toUpperCase()}</span>
                             </div>
                             <div class="podium-stats">
-                                <span>${d.series}</span>
-                                <span>•</span>
                                 <span>${d.sessionsAttended * currentWeek}/${d.totalSessions * currentWeek} Attended</span>
                                 <span>•</span>
                                 <span>${d.completenessPct}% Logged</span>
@@ -2244,7 +2242,6 @@
                                 }
                             </div>
                             <div class="driver-series">
-                                <span class="series-tag">${d.series}</span>
                                 <span>${d.sessionsAttended * currentWeek}/${d.totalSessions * currentWeek} Sessions</span>
                                 ${d.isRemote ? (d.polarVerified ? `<span style="font-size: 10px; color: var(--cyan); font-family: var(--font-mono); font-weight: 600;">📡 Remote (Polar ✔)</span>` : `<span style="font-size: 10px; color: var(--red); font-family: var(--font-mono); font-weight: 600;">📡 Remote (Polar -5pt ⚠)</span>`) : ''}
                                 <div class="cutline-progress-wrap" title="${goalProgress}% toward 80% shirt goal">
@@ -2288,7 +2285,6 @@
                         <div class="drawer-header">
                             <div class="drawer-title">
                                 <span>${d.name.toUpperCase()} — Granular Points & Departmental Breakdown</span>
-                                <span class="series-tag">${d.series}</span>
                                 ${d.isRemote ? (d.polarVerified ? `<span style="font-size: 11px; color: var(--cyan); font-family: var(--font-mono);">📡 Two-a-Days Remote (Polar Verified ✔)</span>` : `<span style="font-size: 11px; color: var(--red); font-family: var(--font-mono);">📡 Two-a-Days Remote (Polar Missing -5pt ⚠)</span>`) : `<span style="font-size: 11px; color: var(--green); font-family: var(--font-mono);">🏢 TPC In-Gym Resident</span>`}
                             </div>
                             <div style="display: flex; gap: 8px;">
@@ -2541,8 +2537,6 @@
                 <div class="mobile-driver-name">${d.name.toUpperCase()}</div>
                 <div class="mobile-standing-badge">
                     <span>P${d.pos} Overall</span>
-                    <span>•</span>
-                    <span>${d.series}</span>
                     <span>•</span>
                     <span style="color: ${d.gap === 0 ? 'var(--gold)' : '#fff'};">${d.gap === 0 ? 'LEADER' : (driverScore - Math.round(DRIVERS_DATA[0].score * currentWeek)) + ' pts'}</span>
                 </div>

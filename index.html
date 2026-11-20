@@ -596,7 +596,7 @@
 
         .board-header {
             display: grid;
-            grid-template-columns: 60px 68px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
+            grid-template-columns: 60px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
             padding: 14px 22px;
             background: #101217;
             border-bottom: 2px solid var(--border);
@@ -611,7 +611,7 @@
 
         .board-row {
             display: grid;
-            grid-template-columns: 60px 68px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
+            grid-template-columns: 60px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
             padding: 15px 22px;
             border-bottom: 1px solid var(--border);
             align-items: center;
@@ -1539,7 +1539,6 @@
         <section class="board-container">
             <div class="board-header">
                 <div>Pos</div>
-                <div>Car</div>
                 <div>Driver</div>
                 <div class="col-right">Score</div>
                 <div class="col-right">Interval</div>
@@ -2182,9 +2181,6 @@
                 html += `
                     <div class="board-row ${isP1 ? 'p1' : ''} ${isPodium ? 'podium' : ''} ${!isQualified ? 'below-cutline' : ''} ${isExpanded ? 'expanded' : ''}" onclick="toggleDriverRow(${d.pos}, event)">
                         <div class="cell-pos">P${d.pos}</div>
-                        <div>
-                            <div class="car-badge">${d.car}</div>
-                        </div>
                         <div class="cell-driver">
                             <div class="driver-name">
                                 <span>${d.name.toUpperCase()}</span>

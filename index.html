@@ -2195,7 +2195,7 @@
 
             filtered.forEach((d) => {
                 const scaledScore = Math.round(d.score * currentWeek);
-                const scaledGap = Math.round(d.gap * currentWeek);
+                const scaledGap = scaledScore - Math.round(DRIVERS_DATA[0].score * currentWeek);
                 const isQualified = scaledScore >= cutlinePts;
 
                 // Render Cut Line divider when score drops below cutlinePts
@@ -2541,7 +2541,7 @@
                     <span>•</span>
                     <span>${d.series}</span>
                     <span>•</span>
-                    <span style="color: ${d.gap === 0 ? 'var(--gold)' : '#fff'};">${d.gap === 0 ? 'LEADER' : Math.round(d.gap) + ' pts'}</span>
+                    <span style="color: ${d.gap === 0 ? 'var(--gold)' : '#fff'};">${d.gap === 0 ? 'LEADER' : (driverScore - Math.round(DRIVERS_DATA[0].score * currentWeek)) + ' pts'}</span>
                 </div>
                 <div style="margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
                     <div style="display: flex; justify-content: space-between; font-size: 11px; font-family: var(--font-display); margin-bottom: 4px;">
@@ -2586,7 +2586,7 @@
                 </div>
                 <div class="mobile-kpi-box">
                     <div class="mobile-kpi-title">Deficit to P1</div>
-                    <div class="mobile-kpi-val" style="color: ${d.gap === 0 ? 'var(--gold)' : '#fff'};">${d.gap === 0 ? 'LEADER' : Math.round(d.gap * currentWeek)}</div>
+                    <div class="mobile-kpi-val" style="color: ${d.gap === 0 ? 'var(--gold)' : '#fff'};">${d.gap === 0 ? 'LEADER' : (driverScore - Math.round(DRIVERS_DATA[0].score * currentWeek))}</div>
                     <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);">${d.gap === 0 ? 'P1 Pace' : 'Behind Westin'}</div>
                 </div>
             `;

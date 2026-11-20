@@ -1513,7 +1513,7 @@
                         <span style="font-size: 14px;">📸</span>
                         <div>
                             <div>Export TV Slides (PNG)</div>
-                            <div class="dropdown-item-desc">Single slide or batch of all 6 series</div>
+                            <div class="dropdown-item-desc">Single slide or batch of all 7 series</div>
                         </div>
                     </div>
                     <div class="dropdown-item" onclick="openTeamworksModal(); closeAllDropdowns();">
@@ -1629,7 +1629,7 @@
         <button class="filter-btn" onclick="filterSeries('CUP', this)">NASCAR Cup</button>
         <button class="filter-btn" onclick="filterSeries('XFINITY', this)">NASCAR Xfinity</button>
         <button class="filter-btn" onclick="filterSeries('ARCA', this)">ARCA Menards</button>
-        <button class="filter-btn" onclick="filterSeries('GT4', this)">Craftsman Truck / GT4</button>
+        <button class="filter-btn" onclick="filterSeries('TRUCK', this)">Craftsman Truck</button><button class="filter-btn" onclick="filterSeries('GT4', this)">GT4</button>
         <button class="filter-btn" onclick="filterSeries('LATE_MODEL', this)">Late Model Development</button>
     </nav>
 
@@ -1815,8 +1815,8 @@
                     </div>
                     <div class="export-tile" onclick="batchExportAllSlidesPng()">
                         <div style="font-size: 24px; margin-bottom: 6px;">⚡</div>
-                        <div class="export-tile-title">Batch Export All 6 Slides</div>
-                        <div class="export-tile-desc">Cycles through All Series, Cup, Xfinity, ARCA, GT4, Late Model and downloads all 6 PNGs.</div>
+                        <div class="export-tile-title">Batch Export All 7 Slides</div>
+                        <div class="export-tile-desc">Cycles through All Series, Cup, Xfinity, ARCA, Craftsman Truck, GT4, Late Model and downloads all 7 PNGs.</div>
                     </div>
                 </div>
 
@@ -2800,7 +2800,7 @@
             const statusBox = document.getElementById('exportStatusBox');
             if (statusBox) {
                 statusBox.style.display = 'block';
-                statusBox.textContent = '⏳ Starting batch export of all 6 TV slides...';
+                statusBox.textContent = '⏳ Starting batch export of all 7 TV slides...';
             }
             if (typeof html2canvas === 'undefined') {
                 alert("html2canvas library is not loaded. Ensure internet connection is active for CDN, or use manual screenshots.");
@@ -2814,14 +2814,14 @@
                 { key: 'CUP', name: 'Slide_2_NASCAR_Cup' },
                 { key: 'XFINITY', name: 'Slide_3_NASCAR_Xfinity' },
                 { key: 'ARCA', name: 'Slide_4_ARCA' },
-                { key: 'GT4', name: 'Slide_5_GT4' },
-                { key: 'LATE_MODEL', name: 'Slide_6_Late_Model' }
+                { key: 'TRUCK', name: 'Slide_5_Craftsman_Truck' }, { key: 'GT4', name: 'Slide_6_GT4' },
+                { key: 'LATE_MODEL', name: 'Slide_7_Late_Model' }
             ];
 
             for (let i = 0; i < slidesToExport.length; i++) {
                 const slide = slidesToExport[i];
                 if (statusBox) {
-                    statusBox.textContent = `⏳ Capturing [${i + 1}/6] ${slide.name}...`;
+                    statusBox.textContent = `⏳ Capturing [${i + 1}/7] ${slide.name}...`;
                 }
                 currentFilter = slide.key;
                 renderPodium();

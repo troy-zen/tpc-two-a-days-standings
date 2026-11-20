@@ -437,7 +437,7 @@
         /* Docked Bottom Series Bar */
         .bottom-series-bar {
             position: fixed;
-            bottom: 33px;
+            bottom: 0;
             left: 0;
             right: 0;
             background: linear-gradient(180deg, rgba(20, 24, 33, 0.95) 0%, rgba(12, 14, 20, 0.98) 100%);
@@ -495,21 +495,6 @@
             border-color: var(--gold);
             background: linear-gradient(135deg, rgba(252, 198, 0, 0.08) 0%, var(--surface) 100%);
             box-shadow: 0 4px 20px rgba(252, 198, 0, 0.12);
-        }
-
-        .podium-card.p1::before {
-            content: "LEADER";
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            font-family: var(--font-display);
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: var(--gold);
-            background: rgba(252, 198, 0, 0.15);
-            padding: 2px 6px;
-            border-radius: 3px;
         }
 
         .podium-rank {
@@ -1509,38 +1494,8 @@
         </div>
 
         <div class="header-controls">
-            <!-- Views Dropdown -->
-            <div class="dropdown">
-                <button class="btn dropdown-toggle" onclick="toggleDropdown('viewsDropdown', event)">
-                    👁️ Views ▾
-                </button>
-                <div class="dropdown-menu" id="viewsDropdown">
-                    <div class="dropdown-item" onclick="toggleMobileView(); closeAllDropdowns();">
-                        <span style="font-size: 14px;">📱</span>
-                        <div>
-                            <div>Driver Mobile Card</div>
-                            <div class="dropdown-item-desc">Snapshot & individual logging view</div>
-                        </div>
-                    </div>
-                    <div class="dropdown-item" id="toggleFormColBtn" onclick="toggleFormColumn(); closeAllDropdowns();">
-                        <span style="font-size: 14px;">📋</span>
-                        <div>
-                            <div>Workout Form Cards</div>
-                            <div class="dropdown-item-desc">Toggle sets/reps completeness column</div>
-                        </div>
-                    </div>
-                    <div class="dropdown-item" onclick="toggleAllDetails(); closeAllDropdowns();">
-                        <span style="font-size: 14px;">↕️</span>
-                        <div>
-                            <div>Expand / Collapse Rows</div>
-                            <div class="dropdown-item-desc">Toggle all driver breakdown tables</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Export & Share Dropdown -->
-            <div class="dropdown">
+            <!-- Export & Share Dropdown (Admin Only) -->
+            <div class="dropdown" id="exportShareDropdown" style="display: none;">
                 <button class="btn dropdown-toggle" onclick="toggleDropdown('shareDropdown', event)">
                     📤 Export & Share ▾
                 </button>
@@ -1549,7 +1504,7 @@
                         <span style="font-size: 14px;">📸</span>
                         <div>
                             <div>Export TV Slides (PNG)</div>
-                            <div class="dropdown-item-desc">Single slide or batch of all 5 series</div>
+                            <div class="dropdown-item-desc">Single slide or batch of all 6 series</div>
                         </div>
                     </div>
                     <div class="dropdown-item" onclick="openTeamworksModal(); closeAllDropdowns();">
@@ -1570,27 +1525,18 @@
             </div>
 
             <button class="btn" onclick="openRulesModal()">
-                ℹ️ Rules (295 pt)
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                Rules &amp; Scoring
             </button>
         </div>
     </header>
 
-    <!-- Sub-Bar / Rules & Filters -->
-    <div class="info-strip">
-        <div class="rule-summary">
-            <span><strong>Scoring:</strong></span>
-            <span class="rule-pill">S&C Workouts (162 pts)</span>
-            <span>+</span>
-            <span class="rule-pill">Yoga & Recov (13 pts)</span>
-            <span>+</span>
-            <span class="rule-pill">Friday Comp (20 pts)</span>
-            <span>+</span>
-            <span class="rule-pill">USG Hydration (100 pts)</span>
-            <span>=</span>
-            <span class="rule-pill"><strong>295 pts / wk</strong></span>
-            <span class="rule-pill" id="cutlineRulePill" style="border-color: var(--gold); color: var(--gold);">⚡ 80% Cut Line = 236.0 pts</span>
-        </div>
-
+    <!-- Sub-Bar / Week Selector -->
+    <div class="info-strip" style="justify-content: flex-end;">
         <div class="filter-group">
             <div class="week-selector-group">
                 <button class="week-btn active" id="weekBtn1" onclick="selectWeek(1)">Week 1 (295)</button>
@@ -1681,15 +1627,6 @@
     </nav>
 
     <!-- Bottom Ticker -->
-    <div class="live-ticker-bar">
-        <div class="ticker-content" id="tickerText">
-            <strong>OFF-SEASON S&C:</strong> Current Cohort: 19 Drivers • Cut Line Threshold: 80% (236.0 pts) • Weekly Max: 295.0 pts (195 S&C + 100 Nutrition) • Leader: Westin Workman (-0.0)
-        </div>
-        <div id="clockDisplay" style="color: var(--text-muted); font-size: 10px;">
-            LOCAL: --:--:-- EST
-        </div>
-    </div>
-
     <!-- Driver Detail Modal (Fallback / Deep Dive) -->
     <div class="modal-overlay" id="driverModal" onclick="closeDriverModal(event)">
         <div class="modal-card" onclick="event.stopPropagation()">
@@ -1754,6 +1691,18 @@
                         <li><strong>🏁 Friday Competition (Max 20.0 pts):</strong> 20.0 pts Event attendance via Teamworks Hub Event Check-In.</li>
                         <li><strong>💧 Stephanie's USG Hydration (Max 100.0 pts):</strong> Monday & Thursday testing. 25.0 pts sample submission + up to 25.0 pts hydration tier score (Tier 1: 25 pts, Tier 2: 15 pts, Tier 3: 10 pts, Tier 4: 5 pts). Max 50.0 pts/test day.</li>
                     </ul>
+                    <div class="rule-summary" style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); flex-wrap: wrap;">
+                        <span class="rule-pill">S&amp;C Workouts (162 pts)</span>
+                        <span>+</span>
+                        <span class="rule-pill">Yoga &amp; Recov (13 pts)</span>
+                        <span>+</span>
+                        <span class="rule-pill">Friday Comp (20 pts)</span>
+                        <span>+</span>
+                        <span class="rule-pill">USG Hydration (100 pts)</span>
+                        <span>=</span>
+                        <span class="rule-pill"><strong>295 pts / wk</strong></span>
+                        <span class="rule-pill" id="cutlineRulePill" style="border-color: var(--gold); color: var(--gold);">⚡ 80% Cut Line = 236.0 pts</span>
+                    </div>
                 </div>
                 <div style="background: var(--surface); padding: 14px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 14px;">
                     <div style="color: var(--gold); font-weight: 700; margin-bottom: 6px;">⚡ Multi-Week 80% T-Shirt Cut Line Milestones:</div>
@@ -2205,11 +2154,10 @@
                 const isP1 = idx === 0;
 
                 html += `
-                    <div class="podium-card ${isP1 ? 'p1' : ''}" onclick="showDriverDetails(${d.pos})">
+                    <div class="podium-card ${isP1 ? 'p1' : ''}" onclick="toggleDriverRow(${d.pos}, event)">
                         <div class="podium-rank">${rankText}</div>
                         <div class="podium-info">
                             <div class="podium-name">
-                                <span class="car-badge-large">${d.car}</span>
                                 <span>${d.name.toUpperCase()}</span>
                             </div>
                             <div class="podium-stats">
@@ -2715,6 +2663,8 @@
         function updateAuthStatusBanner() {
             const banner = document.getElementById('authStatusBanner');
             const authBtn = document.getElementById('authBtn');
+            const exportDropdown = document.getElementById('exportShareDropdown');
+            if (exportDropdown) exportDropdown.style.display = isCoachUnlocked ? '' : 'none';
             if (isCoachUnlocked) {
                 banner.innerHTML = `<span class="badge-coach-active">👑 COACH MASTER MODE ACTIVE — All Cards Unlocked</span>`;
                 if (authBtn) authBtn.innerHTML = `👑 Coach Mode`;
@@ -3043,15 +2993,6 @@
         function closeRulesDirect() {
             document.getElementById('rulesModal').classList.remove('active');
         }
-
-        // Live Clock
-        function updateClock() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-            document.getElementById('clockDisplay').innerText = `LOCAL: ${timeStr} EST`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
 
         // Initial Load
         renderPodium();

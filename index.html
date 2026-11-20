@@ -582,7 +582,7 @@
 
         .board-header {
             display: grid;
-            grid-template-columns: 60px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
+            grid-template-columns: 60px minmax(220px, 2.2fr) 130px 110px 130px 130px 95px;
             padding: 14px 22px;
             background: #101217;
             border-bottom: 2px solid var(--border);
@@ -597,7 +597,7 @@
 
         .board-row {
             display: grid;
-            grid-template-columns: 60px minmax(220px, 2.2fr) 130px 110px 130px 130px 145px 95px;
+            grid-template-columns: 60px minmax(220px, 2.2fr) 130px 110px 130px 130px 95px;
             padding: 15px 22px;
             border-bottom: 1px solid var(--border);
             align-items: center;
@@ -1380,6 +1380,9 @@
                 flex-wrap: wrap;
                 gap: 6px;
             }
+            .header-controls:not(:has(#exportShareDropdown[style*="display: block"])) {
+                display: none;
+            }
             .header-controls .btn {
                 padding: 6px 10px;
                 font-size: 11px;
@@ -1529,20 +1532,19 @@
                     </div>
                 </div>
             </div>
-
-            <button class="btn" onclick="openRulesModal()">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
-                Rules &amp; Scoring
-            </button>
         </div>
     </header>
 
     <!-- Sub-Bar / Week Selector -->
-    <div class="info-strip" style="justify-content: flex-end;">
+    <div class="info-strip" style="justify-content: space-between;">
+        <button class="btn" onclick="openRulesModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Rules &amp; Scoring
+            </button>
         <div class="filter-group">
             <div class="week-selector-group">
                 <button class="week-btn active" id="weekBtn1" onclick="selectWeek(1)">Week 1 (295)</button>
@@ -1610,7 +1612,6 @@
                 <div class="col-right col-gap">Interval</div>
                 <div class="col-right col-att">Attendance</div>
                 <div class="col-right col-comp">Completeness</div>
-                <div class="col-right col-trend">Form Cards</div>
                 <div class="col-right">Details</div>
             </div>
 
@@ -2268,9 +2269,6 @@
                             ${Math.round(d.completenessPts * currentWeek)} pts
                             <div class="progress-subtext" style="color: ${d.completenessPct >= 85 ? 'var(--green)' : 'var(--gold)'};">${d.completenessPct}% logged</div>
                         </div>
-                        <div class="cell-trend col-trend">
-                            ${d.pips.map(p => `<span class="session-pip ${p}"></span>`).join('')}
-                        </div>
                         <div class="cell-action">
                             ${(isCoachUnlocked || (currentAuthDriver && currentAuthDriver.pos === d.pos)) ? `
                                 <button class="btn-details" onclick="toggleDriverRow(${d.pos}, event)" style="${currentAuthDriver && currentAuthDriver.pos === d.pos ? 'border-color: var(--green); color: var(--green);' : ''}">
@@ -2289,7 +2287,7 @@
                     <div class="details-drawer ${isExpanded ? 'open' : ''}" id="drawer-${d.pos}">
                         <div class="drawer-header">
                             <div class="drawer-title">
-                                <span>#${d.car} ${d.name.toUpperCase()} — Granular Points & Departmental Breakdown</span>
+                                <span>${d.name.toUpperCase()} — Granular Points & Departmental Breakdown</span>
                                 <span class="series-tag">${d.series}</span>
                                 ${d.isRemote ? (d.polarVerified ? `<span style="font-size: 11px; color: var(--cyan); font-family: var(--font-mono);">📡 Two-a-Days Remote (Polar Verified ✔)</span>` : `<span style="font-size: 11px; color: var(--red); font-family: var(--font-mono);">📡 Two-a-Days Remote (Polar Missing -5pt ⚠)</span>`) : `<span style="font-size: 11px; color: var(--green); font-family: var(--font-mono);">🏢 TPC In-Gym Resident</span>`}
                             </div>
@@ -2482,13 +2480,13 @@
         function populateMobileSelect() {
             const select = document.getElementById('mobileDriverSelect');
             if (currentAuthDriver) {
-                select.innerHTML = `<option value="${currentAuthDriver.pos}" selected>P${currentAuthDriver.pos} #${currentAuthDriver.car} ${currentAuthDriver.name} (🔒 Locked to You)</option>`;
+                select.innerHTML = `<option value="${currentAuthDriver.pos}" selected>${currentAuthDriver.name} (🔒 Locked to You)</option>`;
                 select.disabled = true;
             } else {
                 select.disabled = false;
                 select.innerHTML = DRIVERS_DATA.map(d => `
                     <option value="${d.pos}" ${d.pos === selectedMobileDriverPos ? 'selected' : ''}>
-                        P${d.pos} #${d.car} ${d.name} (${d.series})
+                        ${d.name}
                     </option>
                 `).join('');
             }
@@ -2514,7 +2512,7 @@
                         <div style="margin-top: 14px; text-align: left;">
                             <label style="font-size: 10px; font-family: var(--font-display); color: var(--text-muted); text-transform: uppercase;">Select Your Name</label>
                             <select id="gateAthleteSelect" style="width: 100%; background: #090a0d; color: #fff; border: 1px solid var(--border-light); font-size: 12px; padding: 8px; border-radius: 4px; margin-top: 4px; margin-bottom: 12px; font-family: var(--font-body);">
-                                ${DRIVERS_DATA.map(x => `<option value="${x.pos}" ${x.pos === pos ? 'selected' : ''}>P${x.pos} #${x.car} ${x.name} (${x.series})</option>`).join('')}
+                                ${DRIVERS_DATA.map(x => `<option value="${x.pos}" ${x.pos === pos ? 'selected' : ''}>${x.name}</option>`).join('')}
                             </select>
                             <label style="font-size: 10px; font-family: var(--font-display); color: var(--text-muted); text-transform: uppercase;">Enter 4-Digit Athlete PIN</label>
                             <div style="display: flex; gap: 8px; margin-top: 4px;">
@@ -2540,7 +2538,6 @@
 
             // Hero
             document.getElementById('mobileHeroContent').innerHTML = `
-                <div class="mobile-car-large">#${d.car}</div>
                 <div class="mobile-driver-name">${d.name.toUpperCase()}</div>
                 <div class="mobile-standing-badge">
                     <span>P${d.pos} Overall</span>
@@ -2661,7 +2658,7 @@
             const select = document.getElementById('pinAthleteSelect');
             select.innerHTML = DRIVERS_DATA.map(d => `
                 <option value="${d.pos}" ${d.pos === preselectPos ? 'selected' : ''}>
-                    P${d.pos} #${d.car} ${d.name} (${d.series})
+                    ${d.name}
                 </option>
             `).join('');
         }
@@ -2675,8 +2672,8 @@
                 banner.innerHTML = `<span class="badge-coach-active">👑 COACH MASTER MODE ACTIVE — All Cards Unlocked</span>`;
                 if (authBtn) authBtn.innerHTML = `👑 Coach Mode`;
             } else if (currentAuthDriver) {
-                banner.innerHTML = `<span class="badge-athlete-active">✔ Unlocked: #${currentAuthDriver.car} ${currentAuthDriver.name}</span>`;
-                if (authBtn) authBtn.innerHTML = `✔ #${currentAuthDriver.car} ${currentAuthDriver.name.split(' ')[0]}`;
+                banner.innerHTML = `<span class="badge-athlete-active">✔ Unlocked: ${currentAuthDriver.name}</span>`;
+                if (authBtn) authBtn.innerHTML = `✔ ${currentAuthDriver.name.split(' ')[0]}`;
             } else {
                 banner.innerHTML = `<span style="font-size: 11px; color: var(--text-muted);">Status: Public Leaderboard Mode (Cards Locked)</span>`;
                 if (authBtn) authBtn.innerHTML = `🔑 Athlete Card`;
@@ -2891,7 +2888,7 @@
             const broadcastText = `🚨 TOYOTA PERFORMANCE CENTER — TPC DRIVER STANDINGS UPDATE\n\n` +
                 `Off-season two-a-days Week 1 results are officially posted on the timing & scoring board!\n\n` +
                 `Public Leaderboard: ${baseUrl}\n` +
-                `Current Leader: #55 Westin Workman (293.5 / 295.0 pts)\n` +
+                `Current Leader: Westin Workman (294 / 295 pts)\n` +
                 `Cut Line: 80.0% compliance (236.0 pts) for the 2026 Off-Season Shirt.\n\n` +
                 `Tap your private magic link below to view your personalized workout card fidelity and Wayne's coaching notes (no password required).`;
 

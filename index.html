@@ -1884,217 +1884,7 @@
     </div>
 
     <script>
-                const DRIVERS_DATA = [
-            {
-                pos: 1, car: "55", name: "Westin Workman", series: "CUP",
-                token: "ww_9b42",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 2, car: "55", name: "Isabella Robusto", series: "ARCA",
-                token: "ir_7x81",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 3, car: "20", name: "Gio Ruggiero", series: "ARCA",
-                token: "gr_3e59",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 4, car: "70", name: "Brent Crews", series: "ARCA",
-                token: "bc_6d14",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 5, car: "51", name: "Kaden Honeycutt", series: "XFINITY",
-                token: "kh_2a78",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 6, car: "17", name: "Taylor Gray", series: "XFINITY",
-                token: "tg_5m93",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 7, car: "25", name: "Toni Breidinger", series: "ARCA",
-                token: "tn_1k47",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 8, car: "18", name: "Tyler Ankrum", series: "XFINITY",
-                token: "ta_8c26",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 9, car: "9", name: "Kaylee Bryson", series: "ARCA",
-                token: "kp_4f90",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 10, car: "71", name: "Jade Avedisian", series: "GT4",
-                token: "ja_6y15",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 11, car: "5", name: "Dean Thompson", series: "XFINITY",
-                token: "dt_9h32",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 12, car: "21", name: "Gavan Boschele", series: "LATE_MODEL",
-                token: "gp_3w84",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 13, car: "1", name: "Kris Wright", series: "ARCA",
-                token: "kh_7t61",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 14, car: "11", name: "Corey Heim", series: "CUP",
-                token: "ch_5j23",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 15, car: "15", name: "Sean Hingorani", series: "ARCA",
-                token: "sh_8r49",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 16, car: "18", name: "William Sawalich", series: "XFINITY",
-                token: "ws_2v74",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 17, car: "2", name: "Jesse Love", series: "XFINITY",
-                token: "jl_9m12",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 18, car: "08", name: "Cannon McIntosh", series: "LATE_MODEL",
-                token: "cm_4p65",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            },
-            {
-                pos: 19, car: "61", name: "Jacob Denney", series: "LATE_MODEL",
-                token: "jd_7n38",
-                score: 0.0, maxScore: 295.0, gap: 0.0,
-                scPts: 0.0, recoveryPts: 0.0, compPts: 0.0, hydrationPts: 0.0,
-                attendancePts: 0.0, sessionsAttended: 0, totalSessions: 0,
-                completenessPct: 0.0, completenessPts: 0.0,
-                pips: [],
-                isRemote: false, polarVerified: true,
-                coachNote: "Awaiting Week 1 check-ins and workout logs."
-            }
-        ];
+                const DRIVERS_DATA = [];
 
         // Global State & Scoring Constants (CQ 295 pt System)
         let currentWeek = 1;
@@ -2153,6 +1943,10 @@
         // Render Top 3 Leaders (Podium)
         function renderPodium() {
             const strip = document.getElementById('podiumStrip');
+            if (!DRIVERS_DATA.length) {
+                strip.innerHTML = '';
+                return;
+            }
             const top3 = DRIVERS_DATA.slice(0, 3);
 
             let html = '';
@@ -2194,6 +1988,20 @@
 
             let html = '';
             let cutLineRendered = false;
+
+            if (!filtered.length) {
+                container.innerHTML = `
+                    <div style="padding: 48px 20px; text-align: center; color: var(--text-muted); font-family: var(--font-display);">
+                        <div style="font-size: 16px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+                            Awaiting First Two-a-Days Report Upload
+                        </div>
+                        <div style="font-size: 12px; font-family: var(--font-body); color: var(--text-muted);">
+                            Standings will populate automatically once athletes appear in Teamworks &amp; AMS reports.
+                        </div>
+                    </div>
+                `;
+                return;
+            }
 
             const cutlinePts = getCutlineThreshold();
             const maxPts = getMaxPossible();
@@ -2478,6 +2286,9 @@
             if (currentAuthDriver) {
                 select.innerHTML = `<option value="${currentAuthDriver.pos}" selected>${currentAuthDriver.name} (🔒 Locked to You)</option>`;
                 select.disabled = true;
+            } else if (!DRIVERS_DATA.length) {
+                select.disabled = true;
+                select.innerHTML = '<option value="">No active leaderboard entries yet</option>';
             } else {
                 select.disabled = false;
                 select.innerHTML = DRIVERS_DATA.map(d => `
@@ -2527,6 +2338,13 @@
                 return;
             }
 
+            if (!DRIVERS_DATA.length) {
+                document.getElementById('mobileHeroContent').innerHTML = '<div style="padding: 24px; color: var(--text-muted); text-align: center;">Awaiting first Two-a-Days report upload.</div>';
+                document.getElementById('mobileKpiContent').innerHTML = '';
+                document.getElementById('mobileSessionsList').innerHTML = '';
+                document.getElementById('mobileCoachNoteBox').innerHTML = '';
+                return;
+            }
             const targetPos = currentAuthDriver ? currentAuthDriver.pos : pos;
             const d = DRIVERS_DATA.find(x => x.pos === targetPos) || DRIVERS_DATA[0];
             const cutlinePts = getCutlineThreshold(); const driverScore = d.score * currentWeek; const isQualified = driverScore >= cutlinePts;
@@ -2650,6 +2468,10 @@
 
         function populatePinSelect(preselectPos) {
             const select = document.getElementById('pinAthleteSelect');
+            if (!DRIVERS_DATA.length) {
+                select.innerHTML = '<option value="">No active leaderboard entries yet</option>';
+                return;
+            }
             select.innerHTML = DRIVERS_DATA.map(d => `
                 <option value="${d.pos}" ${d.pos === preselectPos ? 'selected' : ''}>
                     ${d.name}
